@@ -1,10 +1,9 @@
 # CGRA 2021/2022
 
-## Group T0xG0y
+## Group T07G04
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Bruno Pascoal         | 201705562 | up201705562@up.pt                |
 
 ----
 

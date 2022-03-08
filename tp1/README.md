@@ -1,6 +1,6 @@
 # CGRA 2021/2022
 
-## Group T0xG0y
+## Group T07G04
 
 ## TP 1 Notes
 
