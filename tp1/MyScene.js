@@ -1,6 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
-import { MyTriangle } from "./MyTriangle.js";
 
 /**
  * MyScene
@@ -27,7 +26,6 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -93,14 +91,7 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.triangle.display();
-
-    this.pushMatrix();
-    this.translate(0,-2,0);
-    this.rotate(Math.PI,0,0,1);
-    this.triangle.display();
-    this.popMatrix();
-
+    this.diamond.display();
     // ---- END Primitive drawing section
   }
 }
