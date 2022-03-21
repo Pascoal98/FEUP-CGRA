@@ -116,7 +116,7 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.rotate((3*Math.PI)/4,0,0,1);
-    this.scale(0.7,0.7,0.7);
+    this.scale(0.71,0.71,0.71);
     this.triangle.display();
     this.popMatrix();
 
