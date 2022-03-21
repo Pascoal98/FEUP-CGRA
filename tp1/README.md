@@ -4,9 +4,7 @@
 
 ## TP 1 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+- In exercise 1 we created 2 more figures, a triangle and a parallelogram.
+- In exercise 2 we created two more triangles, one being small and another being big.
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
-
-![Screenshot 1](screenshots/cgra-t0xgxx-tp1-n.png)
+![Screenshot 1](screenshots/cgra-t07g04-tp1-1.png)
