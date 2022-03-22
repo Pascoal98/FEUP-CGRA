@@ -2,7 +2,6 @@ import { CGFobject } from '../lib/CGF.js';
 import { MyDiamond } from './MyDiamond.js';
 import { MyParallelogram } from './MyParallelogram.js';
 import { MyTriangle } from './MyTriangle.js';
-import { MyScene } from './MyScene.js';
 
 /**
  * MyTangram
@@ -35,8 +34,6 @@ export class MyTangram extends CGFobject {
         this.triangle.display();
         this.scene.popMatrix();
         
-
-
         this.scene.pushMatrix();
         this.scene.scale(1 / 2, 1 / 2, 1 / 2);
         this.scene.rotate(Math.PI, 0, 0, 1);
@@ -61,7 +58,6 @@ export class MyTangram extends CGFobject {
         this.scene.scale(-1, 1, 1);
         this.scene.rotate((7 * Math.PI) / 4, 0, 0, 1);
         this.parallelogram.display();
-
         this.scene.popMatrix();
 
     }
