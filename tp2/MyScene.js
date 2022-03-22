@@ -1,6 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
+import { MyParallelogram } from "./MyParallelogram.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -12,7 +14,7 @@ export class MyScene extends CGFscene {
   }
   init(application) {
     super.init(application);
-    
+
     this.initCameras();
     this.initLights();
 
@@ -26,8 +28,7 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
+    this.tangram = new MyTangram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -93,35 +94,7 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.triangle.display();
-
-    this.pushMatrix();
-    this.scale(1/2,1/2,1/2);
-    this.translate(4,0,0);
-    this.triangle.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.translate(0,-2,0);
-    this.rotate(Math.PI,0,0,1);
-    this.triangle.display();
-    this.popMatrix();
-    
-    this.pushMatrix();
-    this.scale(1/2,1/2,1/2);
-    this.rotate(Math.PI,0,0,1);
-    this.translate(1.5,1.5,0);
-    this.triangle.display();
-    this.popMatrix();
-
-    this.pushMatrix();
-    this.rotate((3*Math.PI)/4,0,0,1);
-    this.scale(0.71,0.71,0.71);
-    this.triangle.display();
-    this.popMatrix();
-
-
-
+    this.tangram.display();
 
     // ---- END Primitive drawing section
   }
