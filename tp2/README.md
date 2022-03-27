@@ -11,3 +11,5 @@
 - In exercise 3 we learn how to create a cube by also manipulating the Z coordinate;
 ![Screenshot 2](screenshots/cgra-t07g04-tp2-2.png)
 
+- In exercise 4 we learn how to create a cube using squares and positioning them in order to make a cube;
+![Screenshot 3](screenshots/cgra-t07g04-tp2-3.png)
