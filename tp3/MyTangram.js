@@ -129,4 +129,18 @@ export class MyTangram extends CGFobject {
         
 
     }
+
+    enableNormalViz() {
+        this.diamond.enableNormalViz();
+        this.parallelogram.enableNormalViz();
+        this.triangle.enableNormalViz();
+        
+    }
+
+    disableNormalViz() {
+        this.diamond.disableNormalViz();
+        this.parallelogram.disableNormalViz();
+        this.triangle.disableNormalViz();       
+    }
+
 }
