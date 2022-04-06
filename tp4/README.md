@@ -4,7 +4,6 @@
 
 ## TP 4 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
-
-- In exercise 1 we observed X
+- In exercise we learned how to apply textures to objects; 
+- ![Screenshot 1](screenshots/cgra-t07g04-tp4-1.png)
 - In exercise 2 we had difficulties in Y

@@ -48,9 +48,9 @@ export class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayQuad = true;
-        this.displayMaterial = true;
-        this.displayTangram = false;
+        this.displayQuad = false;
+        this.displayMaterial = false;
+        this.displayTangram = true;
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
         this.wrapS = 0;
