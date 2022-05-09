@@ -1,5 +1,13 @@
 import { CGFobject } from "../lib/CGF";
 
+
+/**
+ * MyUnitCubeQuad
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param points - Array of points  
+*/
+
 export class MyTrack extends CGFobject {
     constructor(scene, points) {
         super(scene);
