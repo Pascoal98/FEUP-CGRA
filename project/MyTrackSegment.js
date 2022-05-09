@@ -1,5 +1,5 @@
 import {CGFappearance, CGFobject} from '../lib/CGF.js';
-import { MyPlane } from './MyPlane.js';
+import { MyQuad } from './MyQuad.js';
 
 
 /**
@@ -20,45 +20,49 @@ export class MyTrackSegment extends CGFobject {
         this.point2X = point2.x;
         this.point2Z = point2.z;
 
-        console.log(this.point1X);
-        
-        this.angle = Math.atan2(this.point2Z - this.point1Z, this.point2X - this.point1X);
+        this.getAngleAndScale();
 
-        console.log(this.angle);
-
-        this.plane = new MyPlane(scene);
+        this.quad = new MyQuad(scene);
 
         this.initMaterials(scene);
+    }
+
+    getAngleAndScale() {
+
+        this.angle = Math.atan2(this.point2Z - this.point1Z, this.point2X - this.point1X);
+
+        let x = this.point2X - this.point1X;
+        let z = this.point2Z - this.point1Z;
+
+        this.scale = Math.sqrt(x*x + z*z);
     }
 
     initMaterials(scene) {
 
         //create rails texture for each track segment
         this.rails = new CGFappearance(scene);
-        this.rails.setAmbient(1, 1, 1, 1);
+        this.rails.setAmbient(0.9, 0.9, 0.9, 1);
         this.rails.setDiffuse(1, 1, 1, 1);
-        this.rails.setSpecular(1, 1, 1, 1);
+        this.rails.setSpecular(0.1, 0.1, 0.1, 1);
         this.rails.setShininess(10.0);
         this.rails.loadTexture('images/tracks.png');
         this.rails.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
-
+        
+        //Apply Texture
         this.rails.apply();
 
-        let x = this.point2X - this.point1X;
-        let z = this.point2Z - this.point1Z;
-        let length = Math.sqrt(x * x + z * z);
-
+        //Apply Transformation
         this.scene.pushMatrix();
         this.scene.translate(this.point1X, 0, this.point1Z);
         this.scene.rotate(-this.angle, 0, 1, 0);
-        this.scene.scale(length, 1, 1);
+        this.scene.scale(this.scale, 1, 1);
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-        this.plane.display();
+        this.quad.display();
         this.scene.popMatrix();
-
+        
     }
 }
