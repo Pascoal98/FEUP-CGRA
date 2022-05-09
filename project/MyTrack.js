@@ -1,18 +1,14 @@
 import { CGFobject } from "../lib/CGF";
 
 export class MyTrack extends CGFobject {
-    constructor(scene) {
+    constructor(scene, points) {
         super(scene);
-        this.initBuffers();
-    }
-
-    initBuffers() {
-
-        this.tracks = [
-            {x: 2, z: 3, type: "simple"},
-            {x: 4, z: 2, type: "station"},
-            {x: 6, z: 2, type: "simple"},
-            {x: 7, z: 3, type: "station"}
+        this.points = [
+            [2, 3, "simple"],
+            [4, 2, "station"],
+            [6, 2, "simple"],
+            [7, 3, "station"]
         ];
+        this.initBuffers();
     }
 }
