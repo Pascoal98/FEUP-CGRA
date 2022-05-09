@@ -1,5 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyTrack } from "./MyTrack.js";
 
 /**
 * MyScene
@@ -29,6 +30,7 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new MyPlane(this, 20, 0,1,0,1);
+        //this.track = new MyTrack(this,[]);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -74,11 +76,13 @@ export class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.scale(50,1,50);
         this.rotate(-Math.PI*0.5, 1,0,0);
         this.plane.display();
         this.popMatrix();
+        */
+        //this.track.display();
         // ---- END Primitive drawing section
     }
 }
