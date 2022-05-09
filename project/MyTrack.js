@@ -1,18 +1,17 @@
-import { CGFobject } from "../lib/CGF";
+import { CGFobject } from "../lib/CGF.js";
 import { MyTrackSegment } from "./MyTrackSegment.js";
 
 
 /**
- * MyUnitCubeQuad
+ * MyTrack
  * @constructor
- * @param scene - Reference to MyScene object
- * @param points - Array of points  
+ * @param scene - Reference to MyScene object 
 */
 
 var listTracks = new Array();
 
 export class MyTrack extends CGFobject {
-    constructor(scene, points) {
+    constructor(scene) {
         super(scene);
         this.points = [
             [2, 3, "simple"],
@@ -20,7 +19,7 @@ export class MyTrack extends CGFobject {
             [6, 2, "simple"],
             [7, 3, "station"]
         ];
-        
+
         this.initBuffers();
     }
 
@@ -28,11 +27,11 @@ export class MyTrack extends CGFobject {
 
         for(let i = 0; i < this.points.length; i++){
             if(i+1 == this.points.length){
-                let point1 = {x: this.points[i][0], z: this.points[i][1]};
-                let point2 = {x: this.points[0][0], z: this.points[0][1]};
+                var point1 = {x: this.points[i][0], z: this.points[i][1]};
+                var point2 = {x: this.points[0][0], z: this.points[0][1]};
             } else {
-                let point1 = {x: this.points[i][0], z: this.points[i][1]};
-                let point2 = {x: this.points[i+1][0], z: this.points[i+1][1]};
+                var point1 = {x: this.points[i][0], z: this.points[i][1]};
+                var point2 = {x: this.points[i+1][0], z: this.points[i+1][1]};
             }
             this.track = new MyTrackSegment(this.scene, point1, point2);
             listTracks[i] = this.track;

@@ -25,18 +25,19 @@ export class MyTrackSegment extends CGFobject {
         this.angle = Math.atan2(this.point2Z - this.point1Z, this.point2X - this.point1X);
 
         console.log(this.angle);
-        
+
         this.plane = new MyPlane(scene);
-        this.applyTexture(scene);
+
+        this.initMaterials(scene);
     }
 
-    applyTexture(scene) {
+    initMaterials(scene) {
 
         //create rails texture for each track segment
         this.rails = new CGFappearance(scene);
-        this.rails.setAmbient(0.1, 0.1, 0.1, 1);
-        this.rails.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.rails.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rails.setAmbient(1, 1, 1, 1);
+        this.rails.setDiffuse(1, 1, 1, 1);
+        this.rails.setSpecular(1, 1, 1, 1);
         this.rails.setShininess(10.0);
         this.rails.loadTexture('images/tracks.png');
         this.rails.setTextureWrap('REPEAT', 'REPEAT');
@@ -46,10 +47,15 @@ export class MyTrackSegment extends CGFobject {
 
         this.rails.apply();
 
+        let x = this.point2X - this.point1X;
+        let z = this.point2Z - this.point1Z;
+        let length = Math.sqrt(x * x + z * z);
+
         this.scene.pushMatrix();
         this.scene.translate(this.point1X, 0, this.point1Z);
-        this.scene.rotate(this.angle, 0, 1, 0);
-        this.scene.scale(0.5, 0.5, 0.5);
+        this.scene.rotate(-this.angle, 0, 1, 0);
+        this.scene.scale(length, 1, 1);
+        this.scene.translate(0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.plane.display();
         this.scene.popMatrix();
