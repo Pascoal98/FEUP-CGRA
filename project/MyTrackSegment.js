@@ -1,7 +1,6 @@
 import {CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 
-
 /**
  * MyTrackSegment
  * @constructor
@@ -70,6 +69,5 @@ export class MyTrackSegment extends CGFobject {
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
-        
     }
 }
