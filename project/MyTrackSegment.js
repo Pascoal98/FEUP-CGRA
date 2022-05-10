@@ -20,20 +20,21 @@ export class MyTrackSegment extends CGFobject {
         this.point2X = point2.x;
         this.point2Z = point2.z;
 
-        this.getAngleAndScale();
-
         this.quad = new MyQuad(scene);
-
+        this.calcAngleAndScale();
         this.initMaterials(scene);
     }
 
-    getAngleAndScale() {
+    //Calculates the angle and scale of the segment
+    calcAngleAndScale() {
 
+        //angle between the two points
         this.angle = Math.atan2(this.point2Z - this.point1Z, this.point2X - this.point1X);
 
         let x = this.point2X - this.point1X;
         let z = this.point2Z - this.point1Z;
 
+        //scaling factor
         this.scale = Math.sqrt(x*x + z*z);
     }
 
@@ -53,11 +54,17 @@ export class MyTrackSegment extends CGFobject {
         
         //Apply Texture
         this.rails.apply();
-
+        
         //Apply Transformation
         this.scene.pushMatrix();
         this.scene.translate(this.point1X, 0, this.point1Z);
         this.scene.rotate(-this.angle, 0, 1, 0);
+        this.quad.updateTexCoords([
+			0, 1,
+			this.scale, 1,
+			0, 0,
+			this.scale, 0
+		]);
         this.scene.scale(this.scale, 1, 1);
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
