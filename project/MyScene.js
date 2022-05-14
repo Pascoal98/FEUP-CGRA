@@ -28,11 +28,13 @@ export class MyScene extends CGFscene {
         
         this.enableTextures(true);
 
+        this.vertices = 20;
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new MyPlane(this, 20, 0,1,0,1);
+        //this.plane = new MyPlane(this, 20, 0,1,0,1);
         this.track = new MyTrack(this);
-        this.circle = new MyCircle(this, 20);
+        this.circle = new MyCircle(this, this.vertices);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -80,8 +82,9 @@ export class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
     
         this.track.display();
-
         this.circle.display();
+        
+
         // ---- END Primitive drawing section
     }
 }
