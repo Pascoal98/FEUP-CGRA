@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyTrack } from "./MyTrack.js";
 import { MyCircle } from "./MyCircle.js";
+import { MySphere } from "./MySphere.js";
 
 /**
 * MyScene
@@ -29,15 +30,30 @@ export class MyScene extends CGFscene {
         this.enableTextures(true);
 
         this.vertices = 20;
+        this.stacks = 10;
+        this.slices = 50;
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         //this.plane = new MyPlane(this, 20, 0,1,0,1);
         this.track = new MyTrack(this);
         this.circle = new MyCircle(this, this.vertices);
+        this.sphere = new MySphere(this, this.slices, this.stacks);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayTrack = false;
+        this.displayCircle = false;
+        this.displaySphere = false;
+
+        //materials
+        this.material = new CGFappearance(this);
+        this.material.setAmbient(0.3, 0.3, 0.3, 1);
+        this.material.setDiffuse(0.6, 0.6, 0.6, 1);
+        this.material.setSpecular(0.0, 0.0, 0.0, 1);
+        this.material.setShininess(10.0);
+        this.material.loadTexture('images/earth.jpg');
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -80,10 +96,14 @@ export class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-    
-        this.track.display();
-        this.circle.display();
+        if(this.displayTrack) this.track.display();
         
+        if(this.displayCircle) this.circle.display();
+        
+        if(this.displaySphere) {
+            this.material.apply();
+            this.sphere.display();
+        }
 
         // ---- END Primitive drawing section
     }
