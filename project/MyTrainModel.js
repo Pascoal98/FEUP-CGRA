@@ -2,6 +2,7 @@ import { CGFappearance, CGFobject } from '../lib/CGF.js';
 import { MyCylinder } from './MyCylinder.js';
 import { MyCube } from './MyCube.js';
 import { MyCircle } from './MyCircle.js';
+import { MySphere } from './MySphere.js'
 
 /**
  * MyTrainModel
@@ -20,6 +21,7 @@ export class MyTrainModel extends CGFobject {
         this.frontCylinder = new MyCylinder(scene, 20);
         this.baseCube = new MyCube(scene);
         this.cabinCube = new MyCube(scene);
+        this.frontCover = new MySphere(scene,20,20);
 
     }
 
@@ -111,6 +113,22 @@ export class MyTrainModel extends CGFobject {
         this.frontCylinder.display();
         this.scene.popMatrix();
 
+        //chimney cylinder
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,3.8,2.1);
+        this.scene.scale(0.2, 0.7, 0.2);
+        this.chimneyCylinder.display();
+        this.scene.popMatrix();
+
+        //Frente 
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,2.9,2.9);
+        this.scene.scale(0.93,0.90,0.6);
+        this.frontCover.display();
+        this.scene.popMatrix();
+
 
     }
 
@@ -121,6 +139,7 @@ export class MyTrainModel extends CGFobject {
         this.frontCylinder.enableNormalViz();
         this.baseCube.enableNormalViz();
         this.cabinCube.enableNormalViz();
+        this.frontCover.enableNormalViz();
     }
 
     disableNormalViz() {
@@ -130,6 +149,7 @@ export class MyTrainModel extends CGFobject {
         this.frontCylinder.disableNormalViz();
         this.baseCube.disableNormalViz();
         this.cabinCube.disableNormalViz();
+        this.frontCover.disableNormalViz();
     }
 
 }
