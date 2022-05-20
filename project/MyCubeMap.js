@@ -74,7 +74,7 @@ export class MyCubeMap extends CGFobject {
         this.cubeBottom.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     }
 	display() {
-        this.scene.pushMatrix();
+        
         this.scene.scale(50,50,50);
         
         // Front
@@ -127,8 +127,6 @@ export class MyCubeMap extends CGFobject {
         this.scene.translate(0.5, 0, 0.5);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.quad.display();
-        this.scene.popMatrix();
-
         this.scene.popMatrix();
     }
     enableNormalViz(){

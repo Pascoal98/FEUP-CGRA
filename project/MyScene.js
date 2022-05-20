@@ -5,6 +5,7 @@ import { MySphere } from "./MySphere.js";
 import { MyCylinder} from "./MyCylinder.js";
 import { MyTrainModel } from "./MyTrainModel.js";
 import { MyCubeMap } from "./MyCubeMap.js";
+import { CGFcamera2 } from "./CGFcamera2.js";
 
 /**
 * MyScene
@@ -52,7 +53,7 @@ export class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayCylinder = false;
         this.displayTrain = true;
-        this.displayCube = false;
+        this.displayCube = true;
         this.textureOn = 0;
 
         //materials
@@ -76,7 +77,7 @@ export class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30,30,30), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera2(0.4, 0.1, 500, vec3.fromValues(30,30,30), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -114,20 +115,20 @@ export class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        if(this.displayTrack) this.track.display();
-        
         if(this.displayCircle) this.circle.display();
         
         if(this.displaySphere) {
             this.material.apply();
             this.sphere.display();
         }
-
+        
         if(this.displayCylinder) this.cylinder.display();
-
+        
         if(this.displayTrain) this.train.display();
-
+        
         if(this.displayCube) this.cube.display();
+        
+        if(this.displayTrack) this.track.display();
 
         // ---- END Primitive drawing section
     }

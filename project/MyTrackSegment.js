@@ -43,7 +43,7 @@ export class MyTrackSegment extends CGFobject {
         this.rails = new CGFappearance(scene);
         this.rails.setAmbient(0.9, 0.9, 0.9, 1);
         this.rails.setDiffuse(1, 1, 1, 1);
-        this.rails.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rails.setSpecular(1, 1, 1, 1);
         this.rails.setShininess(10.0);
         this.rails.loadTexture('images/tracks.png');
         this.rails.setTextureWrap('REPEAT', 'REPEAT');
@@ -64,7 +64,7 @@ export class MyTrackSegment extends CGFobject {
 			0, 0,
 			this.scale, 0
 		]);
-        this.scene.scale(this.scale, 1, 1);
+        this.scene.scale(this.scale, 1, 4);
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.quad.display();
