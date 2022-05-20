@@ -8,6 +8,9 @@
 ![Screenshot 1](screenshots/cgra-t07g04-proj-1.png)  
 - In point 2 we created a circle using triangles and applied texture to it;
 ![Screenshot 2](screenshots/cgra-t07g04-proj-2.png)
-- Point 3 to be added;
+- In point 3 we created a cylinder using triangles;
+![Screenshot 3](screenshots/cgra-t07g04-proj-3.png)
 - In point 4 we created a sphere using slices and stacks to divide and make the figure, also applied texture of earth to it;
 ![Screenshot 4](screenshots/cgra-t07g04-proj-4.png)
+- In point 5 we built the train using the many geometric figures we created previously;
+![Screenshot 5](screenshots/cgra-t07g04-proj-5.png)
