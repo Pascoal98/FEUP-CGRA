@@ -5,6 +5,7 @@ import { MyCircle } from "./MyCircle.js";
 import { MySphere } from "./MySphere.js";
 import { MyCylinder} from "./MyCylinder.js";
 import { MyTrainModel } from "./MyTrainModel.js";
+import { MyCubeMap } from "./MyCubeMap.js";
 
 /**
 * MyScene
@@ -43,6 +44,7 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, this.slices, this.stacks);
         this.cylinder = new MyCylinder(this , this.slices);
         this.train = new MyTrainModel(this);
+        this.cube = new MyCubeMap(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -51,6 +53,7 @@ export class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayCylinder = false;
         this.displayTrain = true;
+        this.displayCube = false;
 
         //materials
         this.material = new CGFappearance(this);
@@ -114,6 +117,8 @@ export class MyScene extends CGFscene {
         if(this.displayCylinder) this.cylinder.display();
 
         if(this.displayTrain) this.train.display();
+
+        if(this.displayCube) this.cube.display();
 
         // ---- END Primitive drawing section
     }
