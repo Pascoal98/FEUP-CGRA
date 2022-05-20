@@ -137,4 +137,23 @@ export class MyCubeMap extends CGFobject {
     disableNormalViz(){
         this.quad.disableNormalViz();
     }
+
+    updateTextures() {
+        if(this.scene.textureOn == 0) {
+            this.cubeLeft.loadTexture('images/demo_cubemap/left.png');
+            this.cubeRight.loadTexture('images/demo_cubemap/right.png');
+            this.cubeFront.loadTexture('images/demo_cubemap/front.png');
+            this.cubeBack.loadTexture('images/demo_cubemap/back.png');
+            this.cubeTop.loadTexture('images/demo_cubemap/top.png');
+            this.cubeBottom.loadTexture('images/demo_cubemap/bottom.png');
+        }
+        else if(this.scene.textureOn == 1) {
+            this.cubeLeft.loadTexture('images/test_cubemap/nx.png');
+            this.cubeRight.loadTexture('images/test_cubemap/px.png');
+            this.cubeFront.loadTexture('images/test_cubemap/nz.png');
+            this.cubeBack.loadTexture('images/test_cubemap/pz.png');
+            this.cubeTop.loadTexture('images/test_cubemap/py.png');
+            this.cubeBottom.loadTexture('images/test_cubemap/ny.png');
+        }
+    }
 }

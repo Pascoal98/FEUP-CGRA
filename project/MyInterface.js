@@ -1,4 +1,5 @@
 import { CGFinterface, dat } from '../lib/CGF.js';
+import { MyCubeMap } from './MyCubeMap.js';
 
 /**
 * MyInterface
@@ -21,11 +22,9 @@ export class MyInterface extends CGFinterface {
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'displayTrack').name('Display Track');
-        this.gui.add(this.scene, 'displayCircle').name('Display Circle');
-        this.gui.add(this.scene, 'displaySphere').name('Display Sphere');
-        this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
         this.gui.add(this.scene, 'displayTrain').name ('Display Train');
         this.gui.add(this.scene, 'displayCube').name ('Display Cube');
+        this.gui.add(this.scene, 'textureOn', this.scene.textureOptions).onChange(this.scene.updateTextures.bind(this.scene)).name('Texture');
 
         this.initKeys();
 

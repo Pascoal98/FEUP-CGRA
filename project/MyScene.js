@@ -1,5 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
-import { MyPlane } from "./MyPlane.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyTrack } from "./MyTrack.js";
 import { MyCircle } from "./MyCircle.js";
 import { MySphere } from "./MySphere.js";
@@ -54,6 +53,7 @@ export class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.displayTrain = true;
         this.displayCube = false;
+        this.textureOn = 0;
 
         //materials
         this.material = new CGFappearance(this);
@@ -62,6 +62,11 @@ export class MyScene extends CGFscene {
         this.material.setSpecular(0.0, 0.0, 0.0, 1);
         this.material.setShininess(10.0);
         this.material.loadTexture('images/earth.jpg');
+
+        this.textureOptions = {
+            'Demo':0,
+            'Test':1,
+        }
 
     }
     initLights() {
@@ -80,6 +85,10 @@ export class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setEmission(0,0,0,1);
         this.setShininess(10.0);
+    }
+
+    updateTextures() {
+        this.cube.updateTextures();
     }
 
     // called periodically (as per setUpdatePeriod() in init())
