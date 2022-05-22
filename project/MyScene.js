@@ -70,14 +70,16 @@ export class MyScene extends CGFscene {
         }
 
     }
+    
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
-        this.camera = new CGFcamera2(0.4, 0.1, 500, vec3.fromValues(30,30,30), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera2(0.5, 0.1, 500, vec3.fromValues(30,30,30), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {

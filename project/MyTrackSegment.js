@@ -1,6 +1,6 @@
 import {CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
-
+ 
 /**
  * MyTrackSegment
  * @constructor

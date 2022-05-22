@@ -73,6 +73,7 @@ export class MyCubeMap extends CGFobject {
         this.cubeBottom.loadTexture('images/demo_cubemap/bottom.png');
         this.cubeBottom.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     }
+    
 	display() {
         
         this.scene.scale(50,50,50);
@@ -92,8 +93,6 @@ export class MyCubeMap extends CGFobject {
         this.quad.display();
         this.scene.popMatrix(); 
 
-        
-        
         // Right
         this.scene.pushMatrix();
         this.cubeRight.apply();
@@ -101,8 +100,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.rotate(-Math.PI / 2, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
-        
-
+    
         // Left
         this.scene.pushMatrix();
         this.cubeLeft.apply();
@@ -110,7 +108,6 @@ export class MyCubeMap extends CGFobject {
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
-
 
         // Top
         this.scene.pushMatrix();
@@ -120,7 +117,6 @@ export class MyCubeMap extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
         
-
         // Bottom
         this.scene.pushMatrix();
         this.cubeBottom.apply();
@@ -128,10 +124,13 @@ export class MyCubeMap extends CGFobject {
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.quad.display();
         this.scene.popMatrix();
+
     }
+
     enableNormalViz(){
         this.quad.enableNormalViz()
     }
+
     disableNormalViz(){
         this.quad.disableNormalViz();
     }
