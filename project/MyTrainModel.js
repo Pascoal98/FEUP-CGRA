@@ -25,8 +25,6 @@ export class MyTrainModel extends CGFobject {
 
     }
 
-
-
     display() {
         //draw wheels front left
         this.scene.pushMatrix();
@@ -177,3 +175,10 @@ export class MyTrainModel extends CGFobject {
     }
 
 }
+
+const vehicle_handler = {
+    state: 0,
+    velocity: 0,
+    direction: null,
+    wood: null
+};
