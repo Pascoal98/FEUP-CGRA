@@ -175,10 +175,3 @@ export class MyTrainModel extends CGFobject {
     }
 
 }
-
-const vehicle_handler = {
-    state: 0,
-    velocity: 0,
-    direction: null,
-    wood: null
-};

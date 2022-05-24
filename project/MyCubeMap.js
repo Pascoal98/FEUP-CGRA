@@ -22,8 +22,9 @@ export class MyCubeMap extends CGFobject {
         //left material
         this.cubeLeft = new CGFappearance(scene);
         this.cubeLeft.setAmbient(0.9, 0.9, 0.9, 1);
-        this.cubeLeft.setDiffuse(1, 1, 1, 1);
-        this.cubeLeft.setSpecular(1, 1, 1, 1);
+        this.cubeLeft.setDiffuse(0, 0, 0, 0);
+        this.cubeLeft.setSpecular(0, 0, 0, 0);
+        this.cubeLeft.setEmission(1,1,1,1);
         this.cubeLeft.setShininess(10.0);
         this.cubeLeft.loadTexture('images/demo_cubemap/left.png');
         this.cubeLeft.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
@@ -31,44 +32,49 @@ export class MyCubeMap extends CGFobject {
         //right material
         this.cubeRight = new CGFappearance(scene);
         this.cubeRight.setAmbient(0.9, 0.9, 0.9, 1);
-        this.cubeRight.setDiffuse(1, 1, 1, 1);
-        this.cubeRight.setSpecular(1, 1, 1, 1);
-        this.cubeRight.setShininess(15.0);
+        this.cubeRight.setDiffuse(0, 0, 0, 0);
+        this.cubeRight.setSpecular(0, 0, 0, 0)
+        this.cubeRight.setEmission(1,1,1,1);
+        this.cubeRight.setShininess(10.0);
         this.cubeRight.loadTexture('images/demo_cubemap/right.png');
         this.cubeRight.setTextureWrap('CLAMP_To_EDGE', 'CLAMP_TO_EDGE');
 
         //front material
         this.cubeFront = new CGFappearance(scene);
         this.cubeFront.setAmbient(0.9, 0.9, 0.9, 1);
-        this.cubeFront.setDiffuse(1, 1, 1, 1);
-        this.cubeFront.setSpecular(1, 1, 1, 1);
-        this.cubeFront.setShininess(15.0);
+        this.cubeFront.setDiffuse(0, 0, 0, 0);
+        this.cubeFront.setSpecular(0, 0, 0, 0);
+        this.cubeFront.setEmission(1, 1, 1, 1);
+        this.cubeFront.setShininess(10.0);
         this.cubeFront.loadTexture('images/demo_cubemap/front.png');
         this.cubeFront.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //back material
         this.cubeBack = new CGFappearance(scene);
         this.cubeBack.setAmbient(0.9, 0.9, 0.9, 1);
-        this.cubeBack.setDiffuse(1, 1, 1, 1);
-        this.cubeBack.setSpecular(1, 1, 1, 1);
-        this.cubeBack.setShininess(15.0);
+        this.cubeBack.setDiffuse(0, 0, 0, 0);
+        this.cubeBack.setSpecular(0, 0, 0, 0);
+        this.cubeBack.setEmission(1, 1, 1, 1);
+        this.cubeBack.setShininess(10.0);
         this.cubeBack.loadTexture('images/demo_cubemap/back.png');
         this.cubeBack.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //top material
         this.cubeTop= new CGFappearance(scene);
         this.cubeTop.setAmbient(0.9, 0.9, 0.9, 1);
-        this.cubeTop.setDiffuse(1, 1, 1, 1);
-        this.cubeTop.setSpecular(1, 1, 1, 1);
-        this.cubeTop.setShininess(20.0);
+        this.cubeTop.setDiffuse(0, 0, 0, 0);
+        this.cubeTop.setSpecular(0, 0, 0, 0);
+        this.cubeTop.setEmission(1, 1, 1, 1);
+        this.cubeTop.setShininess(10.0);
         this.cubeTop.loadTexture('images/demo_cubemap/top.png');
         this.cubeTop.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //bottom material
         this.cubeBottom = new CGFappearance(scene);
         this.cubeBottom.setAmbient(0.9, 0.9, 0.9, 1);
-        this.cubeBottom.setDiffuse(1, 1, 1, 1);
-        this.cubeBottom.setSpecular(1, 1, 1, 1);
+        this.cubeBottom.setDiffuse(0, 0, 0, 0);
+        this.cubeBottom.setSpecular(0, 0, 0, 0);
+        this.cubeBottom.setEmission(1, 1, 1, 1);
         this.cubeBottom.setShininess(10.0);
         this.cubeBottom.loadTexture('images/demo_cubemap/bottom.png');
         this.cubeBottom.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');

@@ -6,7 +6,6 @@ import { MyCylinder} from "./MyCylinder.js";
 import { MyTrainModel } from "./MyTrainModel.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { CGFcamera2 } from "./CGFcamera2.js";
-
 /**
 * MyScene
 * @constructor
@@ -128,10 +127,9 @@ export class MyScene extends CGFscene {
         
         if(this.displayTrain) this.train.display();
         
-        if(this.displayCube) this.cube.display();
-        
         if(this.displayTrack) this.track.display();
-
+        
+        if(this.displayCube) this.cube.display();
         // ---- END Primitive drawing section
     }
 }

@@ -65,7 +65,7 @@ export class MyTrackSegment extends CGFobject {
 			this.scale, 0
 		]);
         this.scene.scale(this.scale, 1, 4);
-        this.scene.translate(0.5, 0, 0);
+        this.scene.translate(0.5, 0.01, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
