@@ -9,6 +9,20 @@ const vehicle_state = {
 
 class State_Machine extends CGFobject {
     constructor(scene) {
-        
+        super(scene);
+
+        this.scene = scene;
+ 
+        this.train = new MyTrainModel(scene);
+        this.tracks = new MyTrack(scene);
+
+        this.currentState = vehicle_state.STOPPED;
+
+    }
+
+    display() {
+
+        this.train.display();
+        this.tracks.display();
     }
 }
