@@ -1,4 +1,4 @@
-import { CGFappearance, CGFobject } from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 import { MyCylinder } from './MyCylinder.js';
 import { MyCube } from './MyCube.js';
 import { MyCircle } from './MyCircle.js';
