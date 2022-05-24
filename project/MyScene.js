@@ -3,7 +3,6 @@ import { MyTrack } from "./MyTrack.js";
 import { MyCircle } from "./MyCircle.js";
 import { MySphere } from "./MySphere.js";
 import { MyCylinder} from "./MyCylinder.js";
-import { MyTrainModel } from "./MyTrainModel.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { CGFcamera2 } from "./CGFcamera2.js";
 import { State_Machine } from "./State_Machine.js";
@@ -39,12 +38,10 @@ export class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        //this.plane = new MyPlane(this, 20, 0,1,0,1);
-        //this.track = new MyTrack(this);
+        this.track = new MyTrack(this);
         this.circle = new MyCircle(this, this.vertices);
         this.sphere = new MySphere(this, this.slices, this.stacks);
         this.cylinder = new MyCylinder(this , this.slices);
-        //this.train = new MyTrainModel(this);
         this.cube = new MyCubeMap(this);
         this.state = new State_Machine(this);
 
@@ -125,10 +122,13 @@ export class MyScene extends CGFscene {
             this.material.apply();
             this.sphere.display();
         }
+
+        if(this.displayTrain) this.state.display();
         
         if(this.displayCylinder) this.cylinder.display();
         
-        this.state.display();
+        if(this.displayTrack) this.track.display();
+
         
         if(this.displayCube) this.cube.display();
         // ---- END Primitive drawing section
