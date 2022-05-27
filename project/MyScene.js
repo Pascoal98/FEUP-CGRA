@@ -47,11 +47,8 @@ export class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayTrack = false;
-        this.displayCircle = false;
-        this.displaySphere = false;
-        this.displayCylinder = false;
-        this.displayTrain = true;
+        this.displayTrack = true;
+        this.displayState = true;
         this.displayCube = true;
         this.textureOn = 0;
 
@@ -95,7 +92,7 @@ export class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        //To be done...
+        this.state.update(t);
     }
 
     display() {
@@ -116,21 +113,21 @@ export class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        if(this.displayCircle) this.circle.display();
-        
-        if(this.displaySphere) {
-            this.material.apply();
-            this.sphere.display();
-        }
 
-        if(this.displayTrain) this.state.display();
+        if(this.displayState)  {
+
+            this.pushMatrix();
+            this.translate(this.state.currentX, 0, this.state.currentZ);
+            this.rotate(this.state.angle, 0, 1, 0);
+            this.state.display();
+            this.popMatrix();
         
-        if(this.displayCylinder) this.cylinder.display();
-        
+        }
+    
         if(this.displayTrack) this.track.display();
 
-        
         if(this.displayCube) this.cube.display();
+
         // ---- END Primitive drawing section
     }
 }
