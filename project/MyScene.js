@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
+import { CGFscene,  CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyTrack } from "./MyTrack.js";
 import { MyCircle } from "./MyCircle.js";
 import { MySphere } from "./MySphere.js";
@@ -28,7 +28,7 @@ export class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(1000/60);
         
         this.enableTextures(true);
 
@@ -92,6 +92,11 @@ export class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+
+        
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyC")) {
+            this.state.currentState = 1;
+        }
         this.state.update(t);
     }
 

@@ -23,10 +23,10 @@ export class State_Machine extends CGFobject {
         this.nextStation = 1;
 
         this.currentX = this.tracks.points[0][0];
+        this.currentZ = this.tracks.points[0][1];
         this.velocity = 0;
 
         this.calcAngle(this.tracks.points[0], this.tracks.points[1]);
-        this.calcTwoPointsLine(this.tracks.points[0], this.tracks.points[1]);
 
     }
 
@@ -35,16 +35,20 @@ export class State_Machine extends CGFobject {
     }
 
     calcTwoPointsLine(point1, point2) {
+        if(point1[0] == point2[0]) {
+            this.currentZ = point1[1];
+        } else {
 
-        this.slope = (point2[1] - point1[1]) / (point2[0] - point1[0]);
+            this.slope = (point2[1] - point1[1]) / (point2[0] - point1[0]);
 
-        this.intercept = point1[1] - this.slope * point1[0];
+            this.intercept = point1[1] - this.slope * point1[0];
 
-        this.currentZ = this.slope * this.currentX + this.intercept;
+            this.currentZ = this.slope * this.currentX + this.intercept;
+        }
     }
 
-    calcDistanceTwoPoints(point1, point2) {
-        this.distance = Math.sqrt(Math.pow(point2[0] - point1[0], 2) + Math.pow(point2[1] - point1[1], 2));
+    calcDistanceTwoPoints(point1X, point1Z, point2X, point2Z) {
+        return Math.sqrt(Math.pow(point2X - point1X, 2) + Math.pow(point2Z - point1Z, 2));
     }
 
     changeStation() {
@@ -55,73 +59,118 @@ export class State_Machine extends CGFobject {
         } else {
             this.nextStation++;
         }
+
+        this.currentX = this.tracks.points[this.currentStation][0];
+        this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+        this.calcAngle(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+
     }
 
     update(t) {
-        
         switch (this.currentState) {
             case vehicle_state.STOPPED:
                 //TO DO check if station has wood && train is empty
-                console.log(this.currentState);
-                if(this.currentX == this.tracks.points[this.currentStation][0]) {
-                    this.currentState = vehicle_state.ACCELERATING;
-                }
-                console.log(this.currentX + " " + this.tracks.points[this.currentStation][0]);
+                this.velocity = 0;
+                console.log(this.velocity + " " + this.currentX + " " + this.currentZ);
                 break;
 
             case vehicle_state.ACCELERATING:
-                if(this.currentX < this.tracks.points[this.nextStation][0] && this.velocity < 0.1) {
-                    this.velocity += 0.01;
-                    this.currentX += this.velocity;
-                    this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-                } else 
-                if(this.currentX > this.tracks.points[this.nextStation][0] && this.velocity < 0.1) {
-                    this.velocity += 0.01;
-                    this.currentX -= this.velocity;
-                    this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+                if(this.velocity < 0.1) {
+                    if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
+                        this.velocity += 0.01;
+                        this.currentZ += this.velocity;
+                    } else
+                    if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ > this.tracks.points[this.nextStation][1]) {
+                        this.velocity += 0.01;
+                        this.currentZ -= this.velocity;
+                    } else
+                    if(this.currentX < this.tracks.points[this.nextStation][0]) {
+                        this.velocity += 0.01;
+                        this.currentX += this.velocity;
+                        this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+                    } else
+                    if(this.currentX > this.tracks.points[this.nextStation][0]) {
+                        this.velocity += 0.01;
+                        this.currentX -= this.velocity;
+                        this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+                    }
                 } else {
+                    this.velocity = 0.1;
                     this.currentState = vehicle_state.CRUISING;
                 }
+                console.log(this.velocity + " " + this.currentX + " " + this.currentZ);
                 break;
 
             case vehicle_state.CRUISING:
-
-                if(this.tracks.points[this.nextStation][0] > this.tracks.points[this.currentStation][0] && this.currentX < this.tracks.points[this.nextStation][0]) {
+                
+                if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
+                    this.currentZ += this.velocity;
+                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
+                    if(this.currentZ > this.tracks.points[this.nextStation][1]) {
+                        this.changeStation();
+                    }
+                } else
+                if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ > this.tracks.points[this.nextStation][1]) {
+                    this.currentZ -= this.velocity;
+                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
+                    if(this.currentZ < this.tracks.points[this.nextStation][1]) {
+                        this.changeStation();
+                    }
+                } else
+                if(this.currentX < this.tracks.points[this.nextStation][0]) {
                     this.currentX += this.velocity;
                     this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-                    
+                    if(this.currentX > this.tracks.points[this.nextStation][0]) {
+                        this.changeStation();
+                    }
+                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
                 } else
-
-                if(this.tracks.points[this.nextStation][0] < this.tracks.points[this.currentStation][0] && this.currentX > this.tracks.points[this.nextStation][0]) {
+                if(this.currentX > this.tracks.points[this.nextStation][0]) {
                     this.currentX -= this.velocity;
                     this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-
-                } else 
-
-                if(this.tracks.points[this.nextStation][0] > this.tracks.points[this.currentStation][0] && this.currentX >= this.tracks.points[this.nextStation][0]) {
-                    this.changeStation();
-                    this.currentX = this.tracks.points[this.currentStation][0];
-                    this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-                    this.calcAngle(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-
-                } else 
-
-                if(this.tracks.points[this.nextStation][0] < this.tracks.points[this.currentStation][0] && this.currentX <= this.tracks.points[this.nextStation][0]) {
-                    
-                    this.changeStation();
-                    this.currentX = this.tracks.points[this.currentStation][0];
-                    this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-                    this.calcAngle(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+                    if(this.currentX < this.tracks.points[this.nextStation][0]) {
+                        this.changeStation();
+                    }
+                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
                 }
-                    
-                /*} else {
+                this.distance1 = this.calcDistanceTwoPoints(this.currentX, this.currentZ, this.tracks.points[this.nextStation][0], this.tracks.points[this.nextStation][1]);
+                console.log(this.distance1 + " " + this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
+
+                if((Math.pow(this.distance1,2) < Math.pow(0.3,2) ) && this.tracks.points[this.nextStation][2] == "station") {
                     this.currentState = vehicle_state.DECELERATING;
-                    console.log(this.currentState);
-                }*/
+                    break;
+                }
                 break;
 
-
             case vehicle_state.DECELERATING:
+                if(this.velocity > 0) {
+                    console.log(this.velocity + " " + this.currentX + " " + this.currentZ + " going slow");
+                    if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
+                        this.velocity -= 0.01;
+                        this.currentZ += this.velocity;
+                    } else
+                    if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ > this.tracks.points[this.nextStation][1]) {
+                        this.velocity -= 0.01;
+                        this.currentZ -= this.velocity;
+                    } else
+                    if(this.currentX < this.tracks.points[this.nextStation][0]) {
+                        this.velocity -= 0.01;
+                        this.currentX += this.velocity;
+                        this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+                    } else
+                    if(this.currentX > this.tracks.points[this.nextStation][0]) {
+                        this.velocity -= 0.01;
+                        this.currentX -= this.velocity;
+                        this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+                    }
+                } else {
+                    this.distance1 = this.calcDistanceTwoPoints(this.currentX, this.currentZ, this.tracks.points[this.nextStation][0], this.tracks.points[this.nextStation][1]);
+                    if(this.distance1 < 0.1) {
+                        this.velocity = 0;
+                        this.changeStation();
+                        this.currentState = vehicle_state.STOPPED;
+                    }
+                }
                 break;
         }
     }
