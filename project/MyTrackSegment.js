@@ -28,10 +28,10 @@ export class MyTrackSegment extends CGFobject {
     calcAngleAndScale() {
 
         //angle between the two points
-        this.angle = Math.atan2(this.point2Z - this.point1Z, this.point2X - this.point1X);
-
         let x = this.point2X - this.point1X;
         let z = this.point2Z - this.point1Z;
+        
+        this.angle = Math.atan2(z, x);
 
         //scaling factor
         this.scale = Math.sqrt(x*x + z*z);
