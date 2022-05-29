@@ -6,6 +6,8 @@ import { MyCylinder} from "./MyCylinder.js";
 import { MyCubeMap } from "./MyCubeMap.js";
 import { CGFcamera2 } from "./CGFcamera2.js";
 import { State_Machine } from "./State_Machine.js";
+import { MyStationModel } from "./MyStationModel.js";
+
 
 /**
 * MyScene
@@ -44,12 +46,14 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this , this.slices);
         this.cube = new MyCubeMap(this);
         this.state = new State_Machine(this);
+        this.station = new MyStationModel(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayTrack = false;
-        this.displayState = true;
+        this.displayState = false;
         this.displayCube = false;
+        this.displayStation = true;
         this.textureOn = 0;
 
         //materials
@@ -123,6 +127,8 @@ export class MyScene extends CGFscene {
         if(this.displayTrack) this.track.display();
 
         if(this.displayCube) this.cube.display();
+
+        if(this.displayStation) this.station.display();
 
         // ---- END Primitive drawing section
     }

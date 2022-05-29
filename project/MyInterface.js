@@ -5,6 +5,7 @@ import { MyCubeMap } from './MyCubeMap.js';
 * MyInterface
 * @constructor
 */
+
 export class MyInterface extends CGFinterface {
     constructor() {
         super();
@@ -24,6 +25,7 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayTrack').name('Display Track');
         this.gui.add(this.scene, 'displayState').name ('Display Train');
         this.gui.add(this.scene, 'displayCube').name ('Display Cube');
+        this.gui.add(this.scene, 'displayStation').name ('Display Station');
         this.gui.add(this.scene, 'textureOn', this.scene.textureOptions).onChange(this.scene.updateTextures.bind(this.scene)).name('Texture');
 
         this.initKeys();
