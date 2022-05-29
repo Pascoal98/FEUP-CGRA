@@ -14,10 +14,10 @@ export class MyTrack extends CGFobject {
     constructor(scene) {
         super(scene);
         this.points = [
-            [10, 10, "station"],
-            [10, 40, "simple"],
-            [45, 40, "station"],
-            [40, 25, "simple"]
+            [15, 15, "station"],
+            [15, 35, "simple"],
+            [35, 35, "station"],
+            [35, 15, "simple"]
         ];
 
         this.initBuffers();
