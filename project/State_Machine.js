@@ -1,6 +1,7 @@
 import { CGFobject } from "../lib/CGF.js";
 import { MyTrainModel } from "./MyTrainModel.js";
 import { MyTrack } from "./MyTrack.js";
+import { MyCrane } from "./MyCrane.js";
 
 const vehicle_state = {
     'STOPPED': 0,
@@ -16,6 +17,7 @@ export class State_Machine extends CGFobject {
         this.scene = scene;
  
         this.train = new MyTrainModel(scene);
+        this.crane = new MyCrane(scene);
         this.tracks = new MyTrack(scene);
 
         this.currentState = vehicle_state.STOPPED;
@@ -181,5 +183,8 @@ export class State_Machine extends CGFobject {
         this.train.display();
         this.scene.popMatrix();
 
+        this.scene.pushMatrix();
+        this.crane.display();
+        this.scene.popMatrix();
     }
 }

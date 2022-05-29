@@ -47,9 +47,9 @@ export class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayTrack = true;
+        this.displayTrack = false;
         this.displayState = true;
-        this.displayCube = true;
+        this.displayCube = false;
         this.textureOn = 0;
 
         //materials
@@ -92,7 +92,6 @@ export class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-
         
         if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyC")) {
             this.state.currentState = 1;
