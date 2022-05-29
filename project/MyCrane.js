@@ -1,6 +1,5 @@
 import { CGFobject } from "../lib/CGF.js";
 import { MyCylinder } from "./MyCylinder.js";
-import { MyCircle } from "./MyCircle.js";
 import { MySphere } from "./MySphere.js";
 
 
@@ -20,7 +19,7 @@ export class MyCrane extends CGFobject {
         this.arm = new MyCylinder(scene, 20);
         this.cable = new MyCylinder(scene, 4);
         this.sphere = new MySphere(scene, 20, 20);
-        
+
     }
 
     display() {

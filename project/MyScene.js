@@ -118,16 +118,8 @@ export class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        if(this.displayState)  {
-
-            this.pushMatrix();
-            this.translate(this.state.currentX, 0, this.state.currentZ);
-            this.rotate(this.state.angle, 0, 1, 0);
-            this.state.display();
-            this.popMatrix();
+        if(this.displayState) this.state.display();
         
-        }
-    
         if(this.displayTrack) this.track.display();
 
         if(this.displayCube) this.cube.display();
