@@ -26,7 +26,8 @@ export class MyStationModel extends CGFobject {
     
     initMaterials(scene) {
 
-        //create roof texture 
+        //house roof texture 
+
         this.roof = new CGFappearance(scene);
         this.roof.setAmbient(0.9, 0.9, 0.9, 1);
         this.roof.setDiffuse(1, 1, 1, 1);
@@ -34,6 +35,8 @@ export class MyStationModel extends CGFobject {
         this.roof.setShininess(10.0);
         this.roof.loadTexture('images/roof.png');
         this.roof.setTextureWrap('REPEAT', 'REPEAT');
+
+        //white color texture
 
         this.houses = new CGFappearance(scene);
         this.houses.setAmbient(0.9, 0.9, 0.9, 1);
@@ -43,6 +46,8 @@ export class MyStationModel extends CGFobject {
         this.houses.loadTexture('images/houses.png');
         this.houses.setTextureWrap('REPEAT', 'REPEAT');
 
+        //porch roof texture
+
         this.porch = new CGFappearance(scene);
         this.porch.setAmbient(0.9, 0.9, 0.9, 1);
         this.porch.setDiffuse(1, 1, 1, 1);
@@ -50,6 +55,8 @@ export class MyStationModel extends CGFobject {
         this.porch.setShininess(10.0);
         this.porch.loadTexture('images/porch.jpg');
         this.porch.setTextureWrap('REPEAT', 'REPEAT');
+
+        //column porch texture
 
         this.column = new CGFappearance(scene);
         this.column.setAmbient(0.9, 0.9, 0.9, 1);
@@ -59,6 +66,8 @@ export class MyStationModel extends CGFobject {
         this.column.loadTexture('images/column.jpg');
         this.column.setTextureWrap('REPEAT', 'REPEAT');
 
+        //station floor texture
+
         this.stationfloor = new CGFappearance(scene);
         this.stationfloor.setAmbient(0.9, 0.9, 0.9, 1);
         this.stationfloor.setDiffuse(1, 1, 1, 1);
@@ -66,6 +75,8 @@ export class MyStationModel extends CGFobject {
         this.stationfloor.setShininess(10.0);
         this.stationfloor.loadTexture('images/stationfloor.jpg');
         this.stationfloor.setTextureWrap('REPEAT', 'REPEAT');
+
+        //mini house texture
 
         this.minihouse = new CGFappearance(scene);
         this.minihouse.setAmbient(0.9, 0.9, 0.9, 1);
@@ -75,6 +86,7 @@ export class MyStationModel extends CGFobject {
         this.minihouse.loadTexture('images/minihouse.png');
         this.minihouse.setTextureWrap('REPEAT', 'REPEAT');
 
+        //main house texture
 
         this.main = new CGFappearance(scene);
         this.main.setAmbient(0.9, 0.9, 0.9, 1);
@@ -83,11 +95,22 @@ export class MyStationModel extends CGFobject {
         this.main.setShininess(10.0);
         this.main.loadTexture('images/main.png');
         this.main.setTextureWrap('REPEAT', 'REPEAT');
+
+        //banner texture
+
+        this.banner = new CGFappearance(scene);
+        this.banner.setAmbient(0.9, 0.9, 0.9, 1);
+        this.banner.setDiffuse(1, 1, 1, 1);
+        this.banner.setSpecular(1, 1, 1, 1);
+        this.banner.setShininess(10.0);
+        this.banner.loadTexture('images/banner.jpg');
+        this.banner.setTextureWrap('REPEAT', 'REPEAT');
     }
 
 
     display() {
 
+        //floor station quad
 
         this.scene.pushMatrix();
         this.stationfloor.apply();
@@ -97,6 +120,7 @@ export class MyStationModel extends CGFobject {
         this.baseCube.display();
         this.scene.popMatrix();
 
+        //main house quad
 
         this.scene.pushMatrix();
         this.houses.apply();
@@ -106,6 +130,8 @@ export class MyStationModel extends CGFobject {
         this.mainhouseCube.display();
         this.scene.popMatrix();
 
+        //mini house quad
+
         this.scene.pushMatrix();
         this.houses.apply();
         this.scene.translate(-1,4,6.5);
@@ -114,7 +140,7 @@ export class MyStationModel extends CGFobject {
         this.minihouseCube.display();
         this.scene.popMatrix();
 
-        
+        // mini house quad
 
         this.scene.pushMatrix();
         this.houses.apply();
@@ -124,7 +150,7 @@ export class MyStationModel extends CGFobject {
         this.minihouseCube.display();
         this.scene.popMatrix();
 
-        
+        //roof mini house
 
         this.scene.pushMatrix();
         this.roof.apply();
@@ -135,6 +161,8 @@ export class MyStationModel extends CGFobject {
         this.roofCube.display();
         this.scene.popMatrix();
 
+        //roof mini house
+
         this.scene.pushMatrix();
         this.roof.apply();
         this.scene.translate(-1,5.8,6.5);
@@ -144,7 +172,7 @@ export class MyStationModel extends CGFobject {
         this.roofCube.display();
         this.scene.popMatrix();
 
-
+        //roof main house
 
         this.scene.pushMatrix();
         this.roof.apply();
@@ -155,6 +183,8 @@ export class MyStationModel extends CGFobject {
         this.roofCube.display();
         this.scene.popMatrix();
 
+        //roof porch
+
         this.scene.pushMatrix();
         this.porch.apply();
         this.scene.translate(3.1,6,0);
@@ -164,6 +194,7 @@ export class MyStationModel extends CGFobject {
         this.porchCube.display();
         this.scene.popMatrix();
 
+        //columns porch
 
         this.scene.pushMatrix();
         this.column.apply();
@@ -172,12 +203,16 @@ export class MyStationModel extends CGFobject {
         this.columnCylinder.display();
         this.scene.popMatrix();
 
+        //columns porch
+
         this.scene.pushMatrix();
         this.column.apply();
         this.scene.translate(5,2,-1.3);
         this.scene.scale(0.07, 3.5, 0.07);
         this.columnCylinder.display();
         this.scene.popMatrix();
+
+        //columns porch
 
         this.scene.pushMatrix();
         this.column.apply();
@@ -186,6 +221,8 @@ export class MyStationModel extends CGFobject {
         this.columnCylinder.display();
         this.scene.popMatrix();
 
+        //columns porch
+
         this.scene.pushMatrix();
         this.column.apply();
         this.scene.translate(5,2,3.8);
@@ -193,13 +230,7 @@ export class MyStationModel extends CGFobject {
         this.columnCylinder.display();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        this.scene.translate(-1,4,6.5);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
-        this.scene.scale(4, 5, 3.6);
-        this.minihouseCube.display();
-        this.scene.popMatrix();
-
+        //front mini house
         
         this.scene.pushMatrix();
         this.minihouse.apply();
@@ -208,12 +239,16 @@ export class MyStationModel extends CGFobject {
         this.minihouseCube.display();
         this.scene.popMatrix();
 
+        //front mini house
+
         this.scene.pushMatrix();
         this.minihouse.apply();
         this.scene.translate(1,4,-6.5);
         this.scene.scale(0.01, 3.6, 5);
         this.minihouseCube.display();
         this.scene.popMatrix();
+
+        //front main house
 
         this.scene.pushMatrix();
         this.main.apply();
@@ -222,7 +257,15 @@ export class MyStationModel extends CGFobject {
         this.minihouseCube.display();
         this.scene.popMatrix();
 
+        //banner
 
+        this.scene.pushMatrix();
+        this.banner.apply();
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.translate(-3.8,4.9,5.5);
+        this.scene.scale(0.01, 1, 1);
+        this.minihouseCube.display();
+        this.scene.popMatrix();
     }
 
     enableNormalViz() {

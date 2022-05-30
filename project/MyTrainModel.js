@@ -27,6 +27,9 @@ export class MyTrainModel extends CGFobject {
 
     }
     initMaterials(scene) {
+
+        // wheel cover texture
+
         this.wheel = new CGFappearance(scene);
         this.wheel.setAmbient(0.9, 0.9, 0.9, 1);
         this.wheel.setDiffuse(1, 1, 1, 1);
@@ -34,6 +37,8 @@ export class MyTrainModel extends CGFobject {
         this.wheel.setShininess(10.0);
         this.wheel.loadTexture('images/wheel.png');
         this.wheel.setTextureWrap('REPEAT', 'REPEAT');
+
+        //base train texture
 
         this.traintext = new CGFappearance(scene);
         this.traintext.setAmbient(0.9, 0.9, 0.9, 1);
@@ -43,6 +48,8 @@ export class MyTrainModel extends CGFobject {
         this.traintext.loadTexture('images/traintext.jpg');
         this.traintext.setTextureWrap('REPEAT', 'REPEAT');
 
+        //body train texture
+
         this.cylinder = new CGFappearance(scene);
         this.cylinder.setAmbient(0.9, 0.9, 0.9, 1);
         this.cylinder.setDiffuse(1, 1, 1, 1);
@@ -50,6 +57,8 @@ export class MyTrainModel extends CGFobject {
         this.cylinder.setShininess(10.0);
         this.cylinder.loadTexture('images/cylinder.jpg');
         this.cylinder.setTextureWrap('REPEAT', 'REPEAT');
+
+        //chimney train texture
 
         this.chimneytext = new CGFappearance(scene);
         this.chimneytext.setAmbient(0.9, 0.9, 0.9, 1);
@@ -59,6 +68,8 @@ export class MyTrainModel extends CGFobject {
         this.chimneytext.loadTexture('images/chimney .png');
         this.chimneytext.setTextureWrap('REPEAT', 'REPEAT');
 
+        //cabin train texture
+
         this.locomotive = new CGFappearance(scene);
         this.locomotive.setAmbient(0.9, 0.9, 0.9, 1);
         this.locomotive.setDiffuse(1, 1, 1, 1);
@@ -66,6 +77,8 @@ export class MyTrainModel extends CGFobject {
         this.locomotive.setShininess(10.0);
         this.locomotive.loadTexture('images/locomotive.png');
         this.locomotive.setTextureWrap('REPEAT', 'REPEAT');
+
+        //front train texture
 
         this.fornttext = new CGFappearance(scene);
         this.fornttext.setAmbient(0.9, 0.9, 0.9, 1);
@@ -179,6 +192,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         //base Cube
+        
         this.scene.pushMatrix();
         this.traintext.apply();
         this.scene.translate(0, 1.5, 0);
@@ -197,6 +211,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         //cabin Cube
+
         this.scene.pushMatrix();
         this.locomotive.apply();
         this.scene.translate(0, 3.2, -0.5);
@@ -205,6 +220,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         //front cylinder
+
         this.scene.pushMatrix();
         this.cylinder.apply();
         this.scene.translate(0, 2.9, 0);
@@ -213,7 +229,8 @@ export class MyTrainModel extends CGFobject {
         this.frontCylinder.display();
         this.scene.popMatrix();
 
-        //chimney cylinder
+        //chimney train cylinder
+
         this.scene.pushMatrix();
         this.chimneytext.apply();
         this.scene.translate(0 ,3.8, 2.1);
@@ -221,7 +238,8 @@ export class MyTrainModel extends CGFobject {
         this.chimneyCylinder.display();
         this.scene.popMatrix();
 
-        //Front 
+        // front sphere
+
         this.scene.pushMatrix();
         this.fornttext.apply();
         this.scene.translate(0,2.9,3.4);
