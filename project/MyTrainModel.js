@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MyCylinder } from './MyCylinder.js';
 import { MyCube } from './MyCube.js';
 import { MyCircle } from './MyCircle.js';
@@ -23,11 +23,64 @@ export class MyTrainModel extends CGFobject {
         this.cabinCube = new MyCube(scene);
         this.frontCover = new MySphere(scene,20,20);
 
+        this.initMaterials(scene);
+
+    }
+    initMaterials(scene) {
+        this.wheel = new CGFappearance(scene);
+        this.wheel.setAmbient(0.9, 0.9, 0.9, 1);
+        this.wheel.setDiffuse(1, 1, 1, 1);
+        this.wheel.setSpecular(1, 1, 1, 1);
+        this.wheel.setShininess(10.0);
+        this.wheel.loadTexture('images/wheel.png');
+        this.wheel.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.traintext = new CGFappearance(scene);
+        this.traintext.setAmbient(0.9, 0.9, 0.9, 1);
+        this.traintext.setDiffuse(1, 1, 1, 1);
+        this.traintext.setSpecular(1, 1, 1, 1);
+        this.traintext.setShininess(10.0);
+        this.traintext.loadTexture('images/traintext.jpg');
+        this.traintext.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.cylinder = new CGFappearance(scene);
+        this.cylinder.setAmbient(0.9, 0.9, 0.9, 1);
+        this.cylinder.setDiffuse(1, 1, 1, 1);
+        this.cylinder.setSpecular(1, 1, 1, 1);
+        this.cylinder.setShininess(10.0);
+        this.cylinder.loadTexture('images/cylinder.jpg');
+        this.cylinder.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.chimneytext = new CGFappearance(scene);
+        this.chimneytext.setAmbient(0.9, 0.9, 0.9, 1);
+        this.chimneytext.setDiffuse(1, 1, 1, 1);
+        this.chimneytext.setSpecular(1, 1, 1, 1);
+        this.chimneytext.setShininess(10.0);
+        this.chimneytext.loadTexture('images/chimney .png');
+        this.chimneytext.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.locomotive = new CGFappearance(scene);
+        this.locomotive.setAmbient(0.9, 0.9, 0.9, 1);
+        this.locomotive.setDiffuse(1, 1, 1, 1);
+        this.locomotive.setSpecular(1, 1, 1, 1);
+        this.locomotive.setShininess(10.0);
+        this.locomotive.loadTexture('images/locomotive.png');
+        this.locomotive.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.fornttext = new CGFappearance(scene);
+        this.fornttext.setAmbient(0.9, 0.9, 0.9, 1);
+        this.fornttext.setDiffuse(1, 1, 1, 1);
+        this.fornttext.setSpecular(1, 1, 1, 1);
+        this.fornttext.setShininess(10.0);
+        this.fornttext.loadTexture('images/front.jpg');
+        this.fornttext.setTextureWrap('REPEAT', 'REPEAT');
+    
     }
 
     display() {
         //draw wheels front left
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(1.45, 0.75, 2.25);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -35,6 +88,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(1.45, 0.75, 2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -42,6 +96,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.traintext.apply();
         this.scene.translate(1.45, 0.75, 2.25);
         this.scene.rotate(Math.PI / 2, 0, 0, 1);
         this.scene.scale(0.75, 0.2, 0.75);
@@ -50,6 +105,7 @@ export class MyTrainModel extends CGFobject {
 
         //draw wheels front right
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(-1.45, 0.75, 2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -57,6 +113,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(-1.45, 0.75, 2.25);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -64,6 +121,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.traintext.apply();
         this.scene.translate(-1.25, 0.75, 2.25);
         this.scene.rotate(Math.PI / 2, 0, 0, 1);
         this.scene.scale(0.75, 0.2, 0.75);
@@ -72,6 +130,7 @@ export class MyTrainModel extends CGFobject {
 
         //draw wheels back left
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(1.45, 0.75, -2.25);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -79,6 +138,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(1.45, 0.75, -2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -86,6 +146,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.traintext.apply();
         this.scene.translate(1.45, 0.75, -2.25);
         this.scene.rotate(Math.PI / 2, 0, 0, 1);
         this.scene.scale(0.75, 0.2, 0.75);
@@ -94,6 +155,7 @@ export class MyTrainModel extends CGFobject {
 
         //draw wheels back right
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(-1.45, 0.75, -2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -101,6 +163,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.wheel.apply();
         this.scene.translate(-1.45, 0.75, -2.25);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
@@ -108,6 +171,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.traintext.apply();
         this.scene.translate(-1.25, 0.75, -2.25);
         this.scene.rotate(Math.PI / 2, 0, 0, 1);
         this.scene.scale(0.75, 0.2, 0.75);
@@ -116,14 +180,25 @@ export class MyTrainModel extends CGFobject {
 
         //base Cube
         this.scene.pushMatrix();
+        this.traintext.apply();
         this.scene.translate(0, 1.5, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(2.5, 7.5, 1);
         this.baseCube.display();
         this.scene.popMatrix();
 
+        this.scene.pushMatrix();
+        this.traintext.apply();
+        this.scene.translate(0, 4.5, -0.5);
+        this.scene.rotate(Math.PI/2, 0,0,1);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.scale(0.1, 2.1, 2.2);
+        this.baseCube.display();
+        this.scene.popMatrix();
+
         //cabin Cube
         this.scene.pushMatrix();
+        this.locomotive.apply();
         this.scene.translate(0, 3.2, -0.5);
         this.scene.scale(2, 2.5, 1.8);
         this.cabinCube.display();
@@ -131,6 +206,7 @@ export class MyTrainModel extends CGFobject {
 
         //front cylinder
         this.scene.pushMatrix();
+        this.cylinder.apply();
         this.scene.translate(0, 2.9, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.9, 3.5, 0.9);
@@ -139,13 +215,15 @@ export class MyTrainModel extends CGFobject {
 
         //chimney cylinder
         this.scene.pushMatrix();
+        this.chimneytext.apply();
         this.scene.translate(0 ,3.8, 2.1);
         this.scene.scale(0.2, 0.7, 0.2);
         this.chimneyCylinder.display();
         this.scene.popMatrix();
 
-        //Frente 
+        //Front 
         this.scene.pushMatrix();
+        this.fornttext.apply();
         this.scene.translate(0,2.9,3.4);
         this.scene.scale(0.9,0.9,0.4);
         this.frontCover.display();
