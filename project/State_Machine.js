@@ -69,6 +69,7 @@ export class State_Machine extends CGFobject {
     }
 
     update(t) {
+
         switch (this.currentState) {
             case vehicle_state.STOPPED:
                 //TO DO check if station has wood && train is empty
@@ -77,6 +78,7 @@ export class State_Machine extends CGFobject {
                 break;
 
             case vehicle_state.ACCELERATING:
+                this.train.running(0.01);
                 if(this.velocity < 0.01) {
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                         this.velocity += 0.001;
@@ -104,7 +106,7 @@ export class State_Machine extends CGFobject {
                 break;
 
             case vehicle_state.CRUISING:
-                
+                this.train.running(0.01);
                 if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                     this.currentZ += this.velocity;
                     console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
@@ -145,6 +147,7 @@ export class State_Machine extends CGFobject {
                 break;
 
             case vehicle_state.DECELERATING:
+                this.train.running(-0.01);
                 if(this.velocity > 0) {
                     console.log(this.velocity + " " + this.currentX + " " + this.currentZ + " going slow");
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
