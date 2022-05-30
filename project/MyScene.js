@@ -51,7 +51,7 @@ export class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayTrack = true;
-        this.displayState = false;
+        this.displayState = true;
         this.displayCube = false;
         this.displayStation = true;
         this.textureOn = 0;
@@ -94,12 +94,54 @@ export class MyScene extends CGFscene {
         this.cube.updateTextures();
     }
 
-    // called periodically (as per setUpdatePeriod() in init())
-    update(t){
-        
+    checkKeys() {
+
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+
+        if(this.gui.isKeyPressed("KeyR")) {
+            this.state.crane.reset();
+            text += " R";
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyW")) {
+            this.state.crane.tilt(0.01);
+            text += " W ";
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyS")) {
+            this.state.crane.tilt(-0.01);
+            text += " S ";
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyA")) {
+            this.state.crane.turn(0.01);
+            text += " A ";
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyD")) {
+            this.state.crane.turn(-0.01);
+            text += " D ";
+            keysPressed = true;
+        }
+
         if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyC")) {
             this.state.currentState = 1;
         }
+
+        if(keysPressed)
+            console.log(text);
+    }
+
+    // called periodically (as per setUpdatePeriod() in init())
+    update(t){
+
+        this.checkKeys();
+        
         this.state.update(t);
     }
 
