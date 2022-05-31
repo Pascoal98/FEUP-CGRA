@@ -52,7 +52,7 @@ export class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayTrack = true;
         this.displayState = true;
-        this.displayCube = false;
+        this.displayCube = true;
         this.displayStation = true;
         this.textureOn = 0;
 
