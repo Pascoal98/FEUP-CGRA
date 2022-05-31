@@ -72,12 +72,13 @@ export class State_Machine extends CGFobject {
 
         switch (this.currentState) {
             case vehicle_state.STOPPED:
+                this.train.cloud.resetCloud();
                 //TO DO check if station has wood && train is empty
                 this.velocity = 0;
-                console.log(this.velocity + " " + this.currentX + " " + this.currentZ);
                 break;
 
             case vehicle_state.ACCELERATING:
+                this.train.cloud.updateCloud();
                 this.train.running(0.01);
                 if(this.velocity < 0.01) {
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
@@ -102,21 +103,19 @@ export class State_Machine extends CGFobject {
                     this.velocity = 0.01;
                     this.currentState = vehicle_state.CRUISING;
                 }
-                console.log(this.velocity + " " + this.currentX + " " + this.currentZ);
                 break;
 
             case vehicle_state.CRUISING:
+                this.train.cloud.updateCloud();
                 this.train.running(0.01);
                 if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                     this.currentZ += this.velocity;
-                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
                     if(this.currentZ > this.tracks.points[this.nextStation][1]) {
                         this.changeStation();
                     }
                 } else
                 if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ > this.tracks.points[this.nextStation][1]) {
                     this.currentZ -= this.velocity;
-                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
                     if(this.currentZ < this.tracks.points[this.nextStation][1]) {
                         this.changeStation();
                     }
@@ -127,7 +126,6 @@ export class State_Machine extends CGFobject {
                     if(this.currentX > this.tracks.points[this.nextStation][0]) {
                         this.changeStation();
                     }
-                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
                 } else
                 if(this.currentX > this.tracks.points[this.nextStation][0]) {
                     this.currentX -= this.velocity;
@@ -135,10 +133,8 @@ export class State_Machine extends CGFobject {
                     if(this.currentX < this.tracks.points[this.nextStation][0]) {
                         this.changeStation();
                     }
-                    console.log(this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
                 }
                 this.distance1 = this.calcDistanceTwoPoints(this.currentX, this.currentZ, this.tracks.points[this.nextStation][0], this.tracks.points[this.nextStation][1]);
-                console.log(this.distance1 + " " + this.currentX + " " + this.currentZ + " " + this.currentStation + " " + this.nextStation);
 
                 if((Math.pow(this.distance1,2) < Math.pow(0.3,2) ) && this.tracks.points[this.nextStation][2] == "station") {
                     this.currentState = vehicle_state.DECELERATING;
@@ -147,9 +143,9 @@ export class State_Machine extends CGFobject {
                 break;
 
             case vehicle_state.DECELERATING:
+                this.train.cloud.updateCloud();
                 this.train.running(-0.01);
                 if(this.velocity > 0) {
-                    console.log(this.velocity + " " + this.currentX + " " + this.currentZ + " going slow");
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                         this.velocity -= 0.001;
                         this.currentZ += this.velocity;

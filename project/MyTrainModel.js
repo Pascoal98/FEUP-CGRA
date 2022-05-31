@@ -2,7 +2,8 @@ import { CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MyCylinder } from './MyCylinder.js';
 import { MyCube } from './MyCube.js';
 import { MyCircle } from './MyCircle.js';
-import { MySphere } from './MySphere.js'
+import { MySphere } from './MySphere.js';
+import { MyTrainSmoke } from './MyTrainSmoke.js';
 
 /**
  * MyTrainModel
@@ -23,6 +24,7 @@ export class MyTrainModel extends CGFobject {
         this.cabinCube = new MyCube(scene);
         this.frontCover = new MySphere(scene,20,20);
         this.box = new MyCube(scene);
+        this.cloud = new MyTrainSmoke(scene);
 
         this.wheelsAngle = 0;
 
@@ -324,6 +326,11 @@ export class MyTrainModel extends CGFobject {
         this.scene.rotate(Math.PI/2,0,1,0);
         this.box.display();
         this.scene.popMatrix()
+
+        //smoke 
+        this.scene.pushMatrix();
+        this.cloud.display();
+        this.scene.popMatrix();
 
 
     }
