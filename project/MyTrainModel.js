@@ -112,7 +112,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.translate(1.45, 0.75, 2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
-        this.scene.rotate(this.wheelsAngle, 0, 0, 1);
+        this.scene.rotate(-this.wheelsAngle, 0, 0, 1);
         this.cover.display();
         this.scene.popMatrix();
 
@@ -130,7 +130,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.translate(-1.45, 0.75, 2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
-        this.scene.rotate(this.wheelsAngle, 0, 0, 1);
+        this.scene.rotate(-this.wheelsAngle, 0, 0, 1);
         this.cover.display();
         this.scene.popMatrix();
 
@@ -166,7 +166,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.translate(1.45, 0.75, -2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
-        this.scene.rotate(this.wheelsAngle, 0, 0, 1);
+        this.scene.rotate(-this.wheelsAngle, 0, 0, 1);
         this.cover.display();
         this.scene.popMatrix();
 
@@ -184,7 +184,7 @@ export class MyTrainModel extends CGFobject {
         this.scene.translate(-1.45, 0.75, -2.25);
         this.scene.rotate((3 * Math.PI) / 2, 0, 1, 0);
         this.scene.scale(0.75, 0.75, 1);
-        this.scene.rotate(this.wheelsAngle, 0, 0, 1);
+        this.scene.rotate(-this.wheelsAngle, 0, 0, 1);
         this.cover.display();
         this.scene.popMatrix();
 

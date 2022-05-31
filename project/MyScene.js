@@ -79,7 +79,7 @@ export class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera2(0.5, 0.1, 500, vec3.fromValues(30,30,30), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera2(1.5 , 0.1, 500, vec3.fromValues(10,15,10), vec3.fromValues(0, 2, 0));
     }
 
     setDefaultAppearance() {
@@ -164,7 +164,9 @@ export class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-
+        this.pushMatrix(); 
+        this.translate(-25,0,-25);
+        
         if(this.displayState) this.state.display();
         
         if(this.displayStation) this.station.display();
@@ -173,6 +175,7 @@ export class MyScene extends CGFscene {
         
         if(this.displayCube) this.cube.display();
 
+        this.popMatrix();
         // ---- END Primitive drawing section
     }
 }
