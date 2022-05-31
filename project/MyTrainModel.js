@@ -22,6 +22,7 @@ export class MyTrainModel extends CGFobject {
         this.baseCube = new MyCube(scene);
         this.cabinCube = new MyCube(scene);
         this.frontCover = new MySphere(scene,20,20);
+        this.box = new MyCube(scene);
 
         this.wheelsAngle = 0;
 
@@ -80,15 +81,25 @@ export class MyTrainModel extends CGFobject {
         this.locomotive.loadTexture('images/locomotive.png');
         this.locomotive.setTextureWrap('REPEAT', 'REPEAT');
 
-        //front train texture
+        //rest train texture
 
-        this.fornttext = new CGFappearance(scene);
-        this.fornttext.setAmbient(0.9, 0.9, 0.9, 1);
-        this.fornttext.setDiffuse(1, 1, 1, 1);
-        this.fornttext.setSpecular(1, 1, 1, 1);
-        this.fornttext.setShininess(10.0);
-        this.fornttext.loadTexture('images/front.jpg');
-        this.fornttext.setTextureWrap('REPEAT', 'REPEAT');
+        this.fronttext = new CGFappearance(scene);
+        this.fronttext.setAmbient(0.9, 0.9, 0.9, 1);
+        this.fronttext.setDiffuse(1, 1, 1, 1);
+        this.fronttext.setSpecular(1, 1, 1, 1);
+        this.fronttext.setShininess(10.0);
+        this.fronttext.loadTexture('images/front.jpg');
+        this.fronttext.setTextureWrap('REPEAT', 'REPEAT');
+
+        //frontoftrain texture
+
+        this.frontt = new CGFappearance(scene);
+        this.frontt.setAmbient(0.9, 0.9, 0.9, 1);
+        this.frontt.setDiffuse(1, 1, 1, 1);
+        this.frontt.setSpecular(1, 1, 1, 1);
+        this.frontt.setShininess(10.0);
+        this.frontt.loadTexture('images/fronttrain.png');
+        this.frontt.setTextureWrap('REPEAT', 'REPEAT');
     
     }
 
@@ -210,10 +221,10 @@ export class MyTrainModel extends CGFobject {
         this.scene.pushMatrix();
         this.traintext.apply();
         this.baseCube.quad.updateTexCoords([
-            0, 7.5,
-			2.5, 7.5,
+            0, 1,
+			1, 1,
 			0, 0,
-			2.5, 0
+			1, 0, 
         ]);
         this.scene.translate(0, 1.5, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
@@ -224,10 +235,10 @@ export class MyTrainModel extends CGFobject {
         this.scene.pushMatrix();
         this.traintext.apply();
         this.baseCube.quad.updateTexCoords([
-            0, 7.5,
-			2.5, 7.5,
+            0, 1,
+			1, 1,
 			0, 0,
-			2.5, 0
+			1, 0
         ]);
         this.scene.translate(0, 4.5, -0.5);
         this.scene.rotate(Math.PI/2, 0,0,1);
@@ -267,12 +278,52 @@ export class MyTrainModel extends CGFobject {
         // front sphere
 
         this.scene.pushMatrix();
-        this.fornttext.apply();
+        this.frontt.apply();
         this.scene.translate(0,2.9,3.4);
         this.scene.scale(0.9,0.9,0.4);
         this.scene.rotate(Math.PI/2,0,1,0);
         this.frontCover.display();
         this.scene.popMatrix();
+
+        //box 
+
+        this.scene.pushMatrix();
+        this.fronttext.apply();
+        this.scene.translate(-1,2.5,-2.7);
+        this.scene.scale(0.1,1.2,1.5);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.box.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(1,2.5,-2.7);
+        this.scene.scale(0.1,1.2,1.5);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.box.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(1,2.5,-2.7);
+        this.scene.scale(0.1,1.2,1.5);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.box.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,2.5,-3.4);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.scale(0.1,1.2,2);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.box.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,2.5,-2);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.scale(0.1,1.2,2);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.box.display();
+        this.scene.popMatrix()
 
 
     }
