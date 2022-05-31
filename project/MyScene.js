@@ -99,37 +99,38 @@ export class MyScene extends CGFscene {
         var text = "Keys pressed: ";
         var keysPressed = false;
 
-        if(this.gui.isKeyPressed("KeyR")) {
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyR")) {
             this.state.crane.reset();
             text += " R";
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyW")) {
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyW")) {
             this.state.crane.tilt(0.01);
             text += " W ";
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyS")) {
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyS")) {
             this.state.crane.tilt(-0.01);
             text += " S ";
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyA")) {
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyA")) {
             this.state.crane.turn(0.01);
             text += " A ";
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyD")) {
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyD")) {
             this.state.crane.turn(-0.01);
             text += " D ";
             keysPressed = true;
         }
 
         if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyC")) {
+            this.state.crane.reset();
             this.state.currentState = 1;
         }
 

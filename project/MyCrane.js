@@ -1,4 +1,4 @@
-import { CGFobject } from "../lib/CGF.js";
+import { CGFobject , CGFappearance} from "../lib/CGF.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MySphere } from "./MySphere.js";
 
@@ -24,6 +24,39 @@ export class MyCrane extends CGFobject {
         this.armturn = 0;
         this.startingAngle = -Math.PI/4;
 
+        this.initMaterials(scene);
+
+    }
+
+    initMaterials(scene) {
+
+        //Wood texture
+        this.wood = new CGFappearance(scene);
+        this.wood.setAmbient(0.9, 0.9, 0.9, 1);
+        this.wood.setDiffuse(1, 1, 1, 1);
+        this.wood.setSpecular(1, 1, 1, 1);
+        this.wood.setShininess(10.0);
+        this.wood.loadTexture('images/wood.jpg');
+        this.wood.setTextureWrap('REPEAT', 'REPEAT');
+
+        //Metal texture
+        this.metal = new CGFappearance(scene);
+        this.metal.setAmbient(0.3, 0.3, 0.3, 1);
+        this.metal.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.metal.setSpecular(0.7, 0.7, 0.7, 1);
+        this.metal.setShininess(10.0);
+        this.metal.loadTexture('images/metal.png');
+        this.metal.setTextureWrap('REPEAT', 'REPEAT');
+
+        //Rusty Texture
+        this.rust = new CGFappearance(scene);
+        this.rust.setAmbient(0.3, 0.3, 0.3, 1);
+        this.rust.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.rust.setSpecular(0.7, 0.7, 0.7, 1);
+        this.rust.setShininess(10.0);
+        this.rust.loadTexture('images/rust.jpg');
+        this.rust.setTextureWrap('REPEAT', 'REPEAT');
+
     }
 
     tilt(val) {
@@ -47,6 +80,7 @@ export class MyCrane extends CGFobject {
 
         //draw base
         this.scene.pushMatrix();
+        this.metal.apply();
         this.scene.translate(0, 4.2, -0.5);
         this.scene.scale(0.2, 1.5, 0.2);
         this.base.display();
@@ -54,6 +88,7 @@ export class MyCrane extends CGFobject {
 
         //draw sphere
         this.scene.pushMatrix();
+        this.rust.apply();
         this.scene.translate(0, 5.65, -0.55);
         this.scene.scale(0.3, 0.3, 0.3);
         this.sphere.display();
@@ -61,6 +96,7 @@ export class MyCrane extends CGFobject {
 
         //draw arm
         this.scene.pushMatrix();
+        this.metal.apply();
         this.scene.translate(0, 5.6, -0.5);
         this.scene.rotate(this.armturn, 0, 1, 0);
         this.scene.rotate(this.startingAngle + this.armtilt, 1, 0, 0);
@@ -70,6 +106,7 @@ export class MyCrane extends CGFobject {
 
         //draw cable
         this.scene.pushMatrix();
+        this.wood.apply();
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(this.armturn, 0, 1, 0);
         this.scene.translate(0, 5.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)));

@@ -67,7 +67,7 @@ export class MyTrainModel extends CGFobject {
         this.chimneytext.setDiffuse(1, 1, 1, 1);
         this.chimneytext.setSpecular(1, 1, 1, 1);
         this.chimneytext.setShininess(10.0);
-        this.chimneytext.loadTexture('images/chimney .png');
+        this.chimneytext.loadTexture('images/chimney.png');
         this.chimneytext.setTextureWrap('REPEAT', 'REPEAT');
 
         //cabin train texture
@@ -209,6 +209,12 @@ export class MyTrainModel extends CGFobject {
         
         this.scene.pushMatrix();
         this.traintext.apply();
+        this.baseCube.quad.updateTexCoords([
+            0, 7.5,
+			2.5, 7.5,
+			0, 0,
+			2.5, 0
+        ]);
         this.scene.translate(0, 1.5, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(2.5, 7.5, 1);
@@ -217,6 +223,12 @@ export class MyTrainModel extends CGFobject {
 
         this.scene.pushMatrix();
         this.traintext.apply();
+        this.baseCube.quad.updateTexCoords([
+            0, 7.5,
+			2.5, 7.5,
+			0, 0,
+			2.5, 0
+        ]);
         this.scene.translate(0, 4.5, -0.5);
         this.scene.rotate(Math.PI/2, 0,0,1);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
@@ -258,6 +270,7 @@ export class MyTrainModel extends CGFobject {
         this.fornttext.apply();
         this.scene.translate(0,2.9,3.4);
         this.scene.scale(0.9,0.9,0.4);
+        this.scene.rotate(Math.PI/2,0,1,0);
         this.frontCover.display();
         this.scene.popMatrix();
 

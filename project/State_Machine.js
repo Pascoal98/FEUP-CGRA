@@ -185,13 +185,13 @@ export class State_Machine extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.currentX, 0, this.currentZ);
         this.scene.rotate(this.angle, 0, 1, 0);
-        this.train.display();
+        this.crane.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(this.currentX, 0, this.currentZ);
         this.scene.rotate(this.angle, 0, 1, 0);
-        this.crane.display();
+        this.train.display();
         this.scene.popMatrix();
     }
 }
