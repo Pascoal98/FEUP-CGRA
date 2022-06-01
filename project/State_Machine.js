@@ -27,6 +27,8 @@ export class State_Machine extends CGFobject {
         this.currentX = this.tracks.points[0][0];
         this.currentZ = this.tracks.points[0][1];
         this.velocity = 0;
+        this.cruiseVelocity = 0.01;
+        this.acceleration = 0.001;
 
         this.calcAngle(this.tracks.points[0], this.tracks.points[1]);
 
@@ -79,35 +81,35 @@ export class State_Machine extends CGFobject {
 
             case vehicle_state.ACCELERATING:
                 this.train.cloud.updateCloud();
-                this.train.running(0.01);
-                if(this.velocity < 0.01) {
+                this.train.running(this.cruiseVelocity);
+                if(this.velocity < this.cruiseVelocity) {
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
-                        this.velocity += 0.001;
+                        this.velocity += this.acceleration;
                         this.currentZ += this.velocity;
                     } else
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ > this.tracks.points[this.nextStation][1]) {
-                        this.velocity += 0.001;
+                        this.velocity += this.acceleration;
                         this.currentZ -= this.velocity;
                     } else
                     if(this.currentX < this.tracks.points[this.nextStation][0]) {
-                        this.velocity += 0.001;
+                        this.velocity += this.acceleration;
                         this.currentX += this.velocity;
                         this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
                     } else
                     if(this.currentX > this.tracks.points[this.nextStation][0]) {
-                        this.velocity += 0.001;
+                        this.velocity += this.acceleration;
                         this.currentX -= this.velocity;
                         this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
                     }
                 } else {
-                    this.velocity = 0.01;
+                    this.velocity = this.cruiseVelocity;
                     this.currentState = vehicle_state.CRUISING;
                 }
                 break;
 
             case vehicle_state.CRUISING:
                 this.train.cloud.updateCloud();
-                this.train.running(0.01);
+                this.train.running(this.cruiseVelocity);
                 if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                     this.currentZ += this.velocity;
                     if(this.currentZ > this.tracks.points[this.nextStation][1]) {
@@ -144,23 +146,23 @@ export class State_Machine extends CGFobject {
 
             case vehicle_state.DECELERATING:
                 this.train.cloud.updateCloud();
-                this.train.running(-0.01);
+                this.train.running(-this.cruiseVelocity);
                 if(this.velocity > 0) {
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
-                        this.velocity -= 0.001;
+                        this.velocity -= this.acceleration;
                         this.currentZ += this.velocity;
                     } else
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ > this.tracks.points[this.nextStation][1]) {
-                        this.velocity -= 0.001;
+                        this.velocity -= this.acceleration;
                         this.currentZ -= this.velocity;
                     } else
                     if(this.currentX < this.tracks.points[this.nextStation][0]) {
-                        this.velocity -= 0.001;
+                        this.velocity -= this.acceleration;
                         this.currentX += this.velocity;
                         this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
                     } else
                     if(this.currentX > this.tracks.points[this.nextStation][0]) {
-                        this.velocity -= 0.001;
+                        this.velocity -= this.acceleration;
                         this.currentX -= this.velocity;
                         this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
                     }
