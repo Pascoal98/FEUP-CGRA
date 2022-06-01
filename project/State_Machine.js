@@ -81,7 +81,7 @@ export class State_Machine extends CGFobject {
 
             case vehicle_state.ACCELERATING:
                 this.train.cloud.updateCloud();
-                this.train.running(this.cruiseVelocity);
+                this.train.running(this.velocity);
                 if(this.velocity < this.cruiseVelocity) {
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                         this.velocity += this.acceleration;
@@ -109,7 +109,7 @@ export class State_Machine extends CGFobject {
 
             case vehicle_state.CRUISING:
                 this.train.cloud.updateCloud();
-                this.train.running(this.cruiseVelocity);
+                this.train.running(this.velocity);
                 if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentX == this.tracks.points[this.nextStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                     this.currentZ += this.velocity;
                     if(this.currentZ > this.tracks.points[this.nextStation][1]) {
@@ -146,7 +146,7 @@ export class State_Machine extends CGFobject {
 
             case vehicle_state.DECELERATING:
                 this.train.cloud.updateCloud();
-                this.train.running(-this.cruiseVelocity);
+                this.train.running(-this.velocity);
                 if(this.velocity > 0) {
                     if(this.currentX == this.tracks.points[this.currentStation][0] && this.currentZ < this.tracks.points[this.nextStation][1]) {
                         this.velocity -= this.acceleration;
