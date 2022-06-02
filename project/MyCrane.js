@@ -3,6 +3,7 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MySphere } from "./MySphere.js";
 
 
+
 /**
  * MyCrane
  * @constructor
@@ -19,6 +20,8 @@ export class MyCrane extends CGFobject {
         this.arm = new MyCylinder(scene, 20);
         this.cable = new MyCylinder(scene, 4);
         this.sphere = new MySphere(scene, 20, 20);
+        this.ssphere = new MySphere(scene, 30, 1);
+        this.clamp = new MyCylinder(scene, 3);
 
         this.armtilt = 0;
         this.armturn = 0;
@@ -110,8 +113,50 @@ export class MyCrane extends CGFobject {
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(this.armturn, 0, 1, 0);
         this.scene.translate(0, 5.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)));
-        this.scene.scale(0.1, 4, 0.1);
+        this.scene.scale(0.06, 4, 0.06);
         this.cable.display();
         this.scene.popMatrix();
+
+        //clamp
+
+
+        this.scene.pushMatrix();
+        this.metal.apply();
+        this.scene.translate(0, 0, -0.5);
+        this.scene.rotate(this.armturn, 0, 1, 0);
+        this.scene.translate(0, 5.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)));
+        this.scene.scale(0.2 , 0.3 , 0.3);
+        this.ssphere.display();
+        this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+        this.metal.apply();
+        this.scene.translate(0, 0, -0.5);
+        this.scene.rotate(this.armturn, 0, 1, 0);
+        this.scene.translate(0, 5.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)));
+        this.scene.scale(0.07 , 0.3 , 0.07);
+        this.clamp.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.metal.apply();
+        this.scene.translate(0, -0.5, -0.7);
+        this.scene.rotate(this.armturn, 0, 1, 0);
+        this.scene.translate(0, 5.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)));
+        this.scene.scale(0.05 , 0.5 , 0.05);
+        this.clamp.display();
+        this.scene.popMatrix();;
+
+        this.scene.pushMatrix();
+        this.metal.apply();
+        this.scene.translate(0, -0.5, -0.3);
+        this.scene.rotate(this.armturn, 0, 1, 0);
+        this.scene.translate(0, 5.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)));
+        this.scene.scale(0.05 , 0.5 , 0.05);
+        this.clamp.display();
+        this.scene.popMatrix();
+        
+        
     }
 }
