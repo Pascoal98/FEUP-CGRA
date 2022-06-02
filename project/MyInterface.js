@@ -21,7 +21,9 @@ export class MyInterface extends CGFinterface {
         var obj = this;
 
         //Checkbox element in GUI
+
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        this.gui.add(this.scene, 'displayInfo').name('Display Info');
         this.gui.add(this.scene, 'displayTrack').name('Display Track');
         this.gui.add(this.scene, 'displayState').name ('Display Train');
         this.gui.add(this.scene, 'displayCube').name ('Display Cube');

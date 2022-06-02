@@ -8,6 +8,7 @@ import { CGFcamera2 } from "./CGFcamera2.js";
 import { State_Machine } from "./State_Machine.js";
 import { PlaceStations } from "./PlaceStations.js";
 import { MyWood } from "./MyWood.js";
+import { MyInfo } from "./MyInfo.js";
 
 
 /**
@@ -49,9 +50,11 @@ export class MyScene extends CGFscene {
         this.state = new State_Machine(this);
         this.station = new PlaceStations(this);
         this.woods = new MyWood(this);
+        this.info = new MyInfo(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayInfo = true;
         this.displayTrack = true;
         this.displayState = true;
         this.displayCube = true;
@@ -169,6 +172,8 @@ export class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         this.pushMatrix(); 
         this.translate(-25,0,-25);
+
+        if(this.displayInfo) this.info.display();
         
         if(this.displayState) this.state.display();
         
