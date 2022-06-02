@@ -7,6 +7,7 @@ import { MyCubeMap } from "./MyCubeMap.js";
 import { CGFcamera2 } from "./CGFcamera2.js";
 import { State_Machine } from "./State_Machine.js";
 import { PlaceStations } from "./PlaceStations.js";
+import { MyWood } from "./MyWood.js";
 
 
 /**
@@ -47,6 +48,7 @@ export class MyScene extends CGFscene {
         this.cube = new MyCubeMap(this);
         this.state = new State_Machine(this);
         this.station = new PlaceStations(this);
+        this.woods = new MyWood(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -54,6 +56,7 @@ export class MyScene extends CGFscene {
         this.displayState = true;
         this.displayCube = true;
         this.displayStation = true;
+        this.displayWood = true;
         this.textureOn = 0;
 
         //materials
@@ -174,6 +177,8 @@ export class MyScene extends CGFscene {
         if(this.displayTrack) this.track.display();
         
         if(this.displayCube) this.cube.display();
+
+        if(this.displayWood) this.woods.display();
 
         this.popMatrix();
         // ---- END Primitive drawing section

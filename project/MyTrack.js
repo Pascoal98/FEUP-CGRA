@@ -15,7 +15,7 @@ export class MyTrack extends CGFobject {
         super(scene);
         this.points = [
             [15, 15, "station"],
-            [15, 35, "simple"],
+            [15, 34, "simple"],
             [35, 35, "station"],
             [35, 15, "simple"]
         ];
