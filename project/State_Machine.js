@@ -26,9 +26,10 @@ export class State_Machine extends CGFobject {
 
         this.currentX = this.tracks.points[0][0];
         this.currentZ = this.tracks.points[0][1];
+        this.angle = 0;
         this.velocity = 0;
-        this.cruiseVelocity = 0.01;
-        this.acceleration = 0.001;
+        this.cruiseVelocity = 0.03;
+        this.acceleration = 0.003;
 
         this.calcAngle(this.tracks.points[0], this.tracks.points[1]);
 
@@ -75,7 +76,6 @@ export class State_Machine extends CGFobject {
         switch (this.currentState) {
             case vehicle_state.STOPPED:
                 this.train.cloud.resetCloud();
-                //TO DO check if station has wood && train is empty
                 this.velocity = 0;
                 break;
 

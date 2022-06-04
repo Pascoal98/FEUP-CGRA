@@ -1,6 +1,7 @@
 import { CGFobject , CGFappearance} from "../lib/CGF.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MySphere } from "./MySphere.js";
+import { MyWood } from "./MyWood.js";
 
 
 
@@ -22,6 +23,7 @@ export class MyCrane extends CGFobject {
         this.sphere = new MySphere(scene, 20, 20);
         this.ssphere = new MySphere(scene, 30, 1);
         this.clamp = new MyCylinder(scene, 3);
+        this.woods = new MyWood(scene);
 
         this.armtilt = 0;
         this.armturn = 0;
@@ -60,6 +62,29 @@ export class MyCrane extends CGFobject {
         this.rust.loadTexture('images/rust.jpg');
         this.rust.setTextureWrap('REPEAT', 'REPEAT');
 
+    }
+
+    updateWood() {
+
+        if(this.woods.currentState == 0) {
+            if(this.armtilt < -0.3 && this.armturn > 1.3)
+                this.woods.currentState = 1;
+            console.log("Wood state: " + this.woods.currentState);
+        } else 
+        if(this.woods.currentState == 1 ) {
+            if(this.armtilt < -0.3 && this.armturn > 1.3)
+                this.woods.currentState = 0;
+            else 
+            if(this.armtilt < -0.3 && this.armturn >= 0)
+                this.woods.currentState = 2;
+
+            console.log("Wood state: " + this.woods.currentState);
+        } else 
+        if(this.woods.currentState == 2) {
+            if(this.armtilt < -0.1 && this.armturn == 0)
+                this.woods.currentState = 1;
+            console.log("Wood state: " + this.woods.currentState);
+        }
     }
 
     tilt(val) {
@@ -157,6 +182,19 @@ export class MyCrane extends CGFobject {
         this.clamp.display();
         this.scene.popMatrix();
         
-        
+        if(this.woods.currentState == 1) {
+            console.log("wood");
+            this.scene.pushMatrix();
+            this.scene.rotate(this.armturn, 0, 1, 0);
+            this.scene.translate(0, 4.5 + 3*(Math.sin(this.startingAngle + this.armtilt)) ,  2.7*(Math.sin(this.startingAngle + this.armtilt)) - 0.5);
+            this.woods.display();
+            this.scene.popMatrix();
+        } else
+        if(this.woods.currentState == 2) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, 2, -3);
+            this.woods.display();
+            this.scene.popMatrix();
+        }
     }
 }

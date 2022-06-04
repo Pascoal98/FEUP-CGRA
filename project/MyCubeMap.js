@@ -81,6 +81,8 @@ export class MyCubeMap extends CGFobject {
     }
     
 	display() {
+
+        this.scene.pushMatrix();
         
         this.scene.scale(50,50,50);
         
@@ -131,6 +133,7 @@ export class MyCubeMap extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
+        this.scene.popMatrix();
     }
 
     enableNormalViz(){

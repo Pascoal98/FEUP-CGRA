@@ -49,7 +49,6 @@ export class MyScene extends CGFscene {
         this.cube = new MyCubeMap(this);
         this.state = new State_Machine(this);
         this.station = new PlaceStations(this);
-        this.woods = new MyWood(this);
         this.info = new MyInfo(this);
 
         //Objects connected to MyInterface
@@ -59,7 +58,6 @@ export class MyScene extends CGFscene {
         this.displayState = true;
         this.displayCube = true;
         this.displayStation = true;
-        this.displayWood = true;
         this.textureOn = 0;
 
         //materials
@@ -135,7 +133,25 @@ export class MyScene extends CGFscene {
             keysPressed = true;
         }
 
-        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyC")) {
+        if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyP")) { 
+            if(this.state.crane.woods.currentState == 0) {
+                this.state.crane.updateWood();
+                text += " P ";
+                keysPressed = true;
+            } else
+            if(this.state.crane.woods.currentState == 1 ) {
+                this.state.crane.updateWood();
+                text += " P ";
+                keysPressed = true;
+            } else
+            if(this.state.crane.woods.currentState == 2) {
+                this.state.crane.updateWood();
+                text += " P ";
+                keysPressed = true;
+            }
+        }
+        
+        if(this.state.currentState == 0 && this.state.crane.woods.currentState == 2 && this.gui.isKeyPressed("KeyC")) {
             this.state.crane.reset();
             this.state.currentState = 1;
         }
@@ -172,7 +188,7 @@ export class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         this.pushMatrix(); 
         this.translate(-25,0,-25);
-
+        
         if(this.displayInfo) this.info.display();
         
         if(this.displayState) this.state.display();
@@ -180,10 +196,29 @@ export class MyScene extends CGFscene {
         if(this.displayStation) this.station.display();
         
         if(this.displayTrack) this.track.display();
+
         
+        if(this.state.crane.woods.currentState == 0) {
+            
+            if(this.state.angle == 0) {
+
+                this.pushMatrix();
+                this.translate(this.state.currentX -2.5, 1.8, this.state.currentZ - 1);
+                this.rotate(-this.state.angle, 0, 1, 0);
+                this.state.crane.woods.display();
+                this.popMatrix();
+            } else 
+            if (this.state.angle == Math.PI) {
+                this.pushMatrix();
+                this.translate(this.state.currentX  + 2.5, 1.8, this.state.currentZ + 1);
+                this.rotate(-this.state.angle, 0, 1, 0);
+                this.state.crane.woods.display();
+                this.popMatrix();
+            }
+        }
+
         if(this.displayCube) this.cube.display();
 
-        if(this.displayWood) this.woods.display();
 
         this.popMatrix();
         // ---- END Primitive drawing section
