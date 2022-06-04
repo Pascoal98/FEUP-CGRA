@@ -161,5 +161,14 @@ export class MyCubeMap extends CGFobject {
             this.cubeTop.loadTexture('images/test_cubemap/py.png');
             this.cubeBottom.loadTexture('images/test_cubemap/ny.png');
         }
+        else if(this.scene.textureOn == 2) {
+            this.cubeLeft.loadTexture('images/our_cubemap/left.png');
+            this.cubeRight.loadTexture('images/our_cubemap/right.png');
+            this.cubeFront.loadTexture('images/our_cubemap/front.png');
+            this.cubeBack.loadTexture('images/our_cubemap/back.png');
+            this.cubeTop.loadTexture('images/our_cubemap/top.png');
+            this.cubeBottom.loadTexture('images/our_cubemap/bottom.png');
+        }
+        
     }
 }

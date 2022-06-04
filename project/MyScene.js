@@ -71,6 +71,7 @@ export class MyScene extends CGFscene {
         this.textureOptions = {
             'Demo':0,
             'Test':1,
+            'Our' :2,
         }
 
     }
