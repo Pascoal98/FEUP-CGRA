@@ -10,9 +10,8 @@ import { MyCircle } from './MyCircle.js';
 
 
 const wood_state = {
-    'STATION' : 0,
+    'NOTATTACHED' : 0,
     'ATTACHED' : 1,
-    'TRAIN' : 2,
 }
 
 
@@ -24,7 +23,8 @@ export class MyWood extends CGFobject {
         this.wood = new MyCylinder(scene, 20);
         this.cover = new MyCircle(scene, 20);
 
-        this.currentState = wood_state.STATION;
+        this.currentState = wood_state.NOTATTACHED;
+        this.isLoaded = false;
 
         this.initMaterials(scene);
 

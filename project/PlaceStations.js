@@ -2,9 +2,6 @@ import { CGFobject } from "../../lib/CGF.js";
 import { MyTrack } from "./MyTrack.js";
 import { MyStationModel } from "./MyStationModel.js";
 
-var listStations = new Array();
-var stationPoints = [];
-
 export class PlaceStations extends CGFobject {
     constructor(scene) {
         super(scene);
@@ -25,6 +22,9 @@ export class PlaceStations extends CGFobject {
     }
 
     initBuffers() {
+
+        this.listStations = [];
+        this.stationPoints = [];
         
         for(let i = 0; i < this.track.points.length; i++){
             if(this.track.points[i][2] == "station"){
@@ -35,27 +35,27 @@ export class PlaceStations extends CGFobject {
                     var point1 = {x: this.track.points[i][0], z: this.track.points[i][1]};
                     var point2 = {x: this.track.points[i+1][0], z: this.track.points[i+1][1]};
                 }
-                stationPoints.push(point1);
-                stationPoints.push(point2);
+                this.stationPoints.push(point1);
+                this.stationPoints.push(point2);
 
                 this.station = new MyStationModel(this.scene);
-                listStations.push(this.station);
+                this.listStations.push(this.station);
             }
         }
     }
 
     display() {
-        for(let i = 0; i < listStations.length; i++){
+        for(let i = 0; i < this.listStations.length; i++){
 
-            this.calcStationAngle(stationPoints[2*i], stationPoints[2*i+1]);
+            this.calcStationAngle(this.stationPoints[2*i], this.stationPoints[2*i+1]);
             
             this.scene.pushMatrix();
-            this.scene.translate(stationPoints[2*i].x, 0 , stationPoints[2*i].z);
+            this.scene.translate(this.stationPoints[2*i].x, 0 , this.stationPoints[2*i].z);
             this.scene.scale(0.8, 0.8, 0.8);
             this.scene.rotate(-this.angle,0,1,0);
             this.scene.rotate(Math.PI/2,0,1,0);
             this.scene.translate(-9.5, 0, 0);
-            listStations[i].display();
+            this.listStations[i].display();
             this.scene.popMatrix();
         }
     }

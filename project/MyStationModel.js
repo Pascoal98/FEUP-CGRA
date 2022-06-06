@@ -1,6 +1,7 @@
 import { CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MyCube } from './MyCube.js';
 import { MyCylinder } from './MyCylinder.js';
+import { MyWood } from './MyWood.js';
 
 /**
  * MyStationModel
@@ -19,6 +20,7 @@ export class MyStationModel extends CGFobject {
         this.roofCube = new MyCube(scene);
         this.porchCube = new MyCube(scene);
         this.columnCylinder = new MyCylinder(scene, 20);
+        this.wood = new MyWood(scene);
         
         this.initMaterials(scene);
 
@@ -266,6 +268,14 @@ export class MyStationModel extends CGFobject {
         this.scene.scale(0.01, 1, 1);
         this.minihouseCube.display();
         this.scene.popMatrix();
+
+        //wood
+        if(!this.wood.isLoaded){
+            this.scene.pushMatrix();
+            this.scene.translate(6,2.2,-1.2);
+            this.wood.display();
+            this.scene.popMatrix();
+        }
     }
 
     enableNormalViz() {

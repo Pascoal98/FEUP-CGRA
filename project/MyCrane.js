@@ -67,23 +67,25 @@ export class MyCrane extends CGFobject {
     updateWood() {
 
         if(this.woods.currentState == 0) {
-            if(this.armtilt < -0.3 && this.armturn > 1.3)
+            if(this.armtilt < -0.3 && this.armturn > 1.3 && !this.woods.isLoaded){
                 this.woods.currentState = 1;
-            console.log("Wood state: " + this.woods.currentState);
+            }
+            if(this.armtilt < -0.1 && this.armturn == 0 && this.woods.isLoaded) {
+                this.woods.currentState = 1;
+                this.woods.isLoaded = false;
+            }
+            console.log("Wood state: " + this.woods.currentState + " isLoaded: " + this.woods.isLoaded);
         } else 
         if(this.woods.currentState == 1 ) {
-            if(this.armtilt < -0.3 && this.armturn > 1.3)
+            if(this.armtilt < -0.3 && this.armturn > 1.3 && !this.woods.isLoaded) {
                 this.woods.currentState = 0;
+            }
             else 
-            if(this.armtilt < -0.3 && this.armturn >= 0)
-                this.woods.currentState = 2;
-
-            console.log("Wood state: " + this.woods.currentState);
-        } else 
-        if(this.woods.currentState == 2) {
-            if(this.armtilt < -0.1 && this.armturn == 0)
-                this.woods.currentState = 1;
-            console.log("Wood state: " + this.woods.currentState);
+            if(this.armtilt < -0.3 && this.armturn >= 0 && !this.woods.isLoaded) {
+                this.woods.currentState = 0;
+                this.woods.isLoaded = true;
+            }
+            console.log("Wood state: " + this.woods.currentState + " isLoaded: " + this.woods.isLoaded);
         }
     }
 
@@ -190,7 +192,7 @@ export class MyCrane extends CGFobject {
             this.woods.display();
             this.scene.popMatrix();
         } else
-        if(this.woods.currentState == 2) {
+        if(this.woods.currentState == 0 && this.woods.isLoaded) {
             this.scene.pushMatrix();
             this.scene.translate(0, 2, -3);
             this.woods.display();

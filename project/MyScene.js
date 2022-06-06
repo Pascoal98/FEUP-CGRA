@@ -137,24 +137,24 @@ export class MyScene extends CGFscene {
         if(this.state.currentState == 0 && this.gui.isKeyPressed("KeyP")) { 
             if(this.state.crane.woods.currentState == 0) {
                 this.state.crane.updateWood();
+                if(this.state.crane.woods.currentState == 1)
+                    this.station.listStations[this.state.countStations].wood.isLoaded = true;
                 text += " P ";
                 keysPressed = true;
             } else
             if(this.state.crane.woods.currentState == 1 ) {
                 this.state.crane.updateWood();
-                text += " P ";
-                keysPressed = true;
-            } else
-            if(this.state.crane.woods.currentState == 2) {
-                this.state.crane.updateWood();
+                if(!this.state.crane.woods.isLoaded && this.state.crane.woods.currentState == 0)
+                    this.station.listStations[this.state.countStations].wood.isLoaded = false;
                 text += " P ";
                 keysPressed = true;
             }
         }
         
-        if(this.state.currentState == 0 && this.state.crane.woods.currentState == 2 && this.gui.isKeyPressed("KeyC")) {
+        if(this.state.currentState == 0 && this.state.crane.woods.currentState == 0 && this.gui.isKeyPressed("KeyC") && this.station.listStations[this.state.countStations].wood.isLoaded) {
             this.state.crane.reset();
             this.state.currentState = 1;
+            this.station.listStations[this.state.countStations].wood.isLoaded = false;
         }
 
         if(keysPressed)
@@ -165,8 +165,9 @@ export class MyScene extends CGFscene {
     update(t){
 
         this.checkKeys();
-        
+    
         this.state.update(t);
+ 
     }
 
     display() {
@@ -197,26 +198,6 @@ export class MyScene extends CGFscene {
         if(this.displayStation) this.station.display();
         
         if(this.displayTrack) this.track.display();
-
-        
-        if(this.state.crane.woods.currentState == 0) {
-            
-            if(this.state.angle == 0) {
-
-                this.pushMatrix();
-                this.translate(this.state.currentX -2.5, 1.8, this.state.currentZ - 1);
-                this.rotate(-this.state.angle, 0, 1, 0);
-                this.state.crane.woods.display();
-                this.popMatrix();
-            } else 
-            if (this.state.angle == Math.PI) {
-                this.pushMatrix();
-                this.translate(this.state.currentX  + 2.5, 1.8, this.state.currentZ + 1);
-                this.rotate(-this.state.angle, 0, 1, 0);
-                this.state.crane.woods.display();
-                this.popMatrix();
-            }
-        }
 
         if(this.displayCube) this.cube.display();
 

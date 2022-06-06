@@ -23,13 +23,14 @@ export class State_Machine extends CGFobject {
         this.currentState = vehicle_state.STOPPED;
         this.currentStation = 0;
         this.nextStation = 1;
+        this.countStations = 0;
 
         this.currentX = this.tracks.points[0][0];
         this.currentZ = this.tracks.points[0][1];
         this.angle = 0;
         this.velocity = 0;
-        this.cruiseVelocity = 0.03;
-        this.acceleration = 0.003;
+        this.cruiseVelocity = 0.07;
+        this.acceleration = 0.007;
 
         this.calcAngle(this.tracks.points[0], this.tracks.points[1]);
 
@@ -61,8 +62,14 @@ export class State_Machine extends CGFobject {
         
         if(this.nextStation + 1 >= this.tracks.points.length) {
             this.nextStation = 0;
+            if(this.tracks.points[this.nextStation][2] == "station") {
+                this.countStations = 0;
+            }
         } else {
             this.nextStation++;
+            if(this.tracks.points[this.nextStation][2] == "station") {
+                this.countStations++;
+            }
         }
 
         this.currentX = this.tracks.points[this.currentStation][0];
@@ -171,6 +178,7 @@ export class State_Machine extends CGFobject {
                     if(this.distance1 < 1) {
                         this.velocity = 0;
                         this.changeStation();
+                        this.crane.woods.isLoaded = false;
                         this.currentState = vehicle_state.STOPPED;
                     }
                 }
