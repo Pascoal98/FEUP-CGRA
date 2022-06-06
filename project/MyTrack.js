@@ -16,10 +16,8 @@ export class MyTrack extends CGFobject {
         this.points = [
             [15, 15, "station"],
             [15, 35, "simple"],
-            [20, 40, "station"],
-            [35, 35, "simple"],
-            [35, 15, "station"],
-            [20, 10, "simple"],
+            [35, 35, "station"],
+            [35, 15, "simple"],
         ];
         this.initBuffers();
     }

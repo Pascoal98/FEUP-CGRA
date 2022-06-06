@@ -88,14 +88,16 @@ export class State_Machine extends CGFobject {
         
         if(this.nextStation + 1 >= this.tracks.points.length) {
             this.drift = this.calcAngle(this.tracks.points[this.nextStation], this.tracks.points[0]);
+            this.tempAngle = this.calcAngle(this.tracks.points[this.nextStation], this.tracks.points[0]);
         } else {
             this.drift = this.calcAngle(this.tracks.points[this.nextStation], this.tracks.points[this.nextStation + 1]);
+            this.tempAngle = this.calcAngle(this.tracks.points[this.nextStation], this.tracks.points[this.nextStation + 1]);
         }
 
         if(this.tracks.points[this.nextStation][2] == "station") {
-            this.frames = 2 / 0.015;
+            this.frames = 2 / 0.01;
         } else {
-            this.frames = 2 / this.cruiseVelocity;
+            this.frames = 2 / 0.025;
         }
 
         this.val = this.drift/this.frames;
@@ -104,9 +106,15 @@ export class State_Machine extends CGFobject {
 
         if(this.drift < 0) {
             this.val *= -1;
-        }
-        if(this.distance1 < 2) {
+
+            if(this.distance1 < 2 && this.val - this.angle > this.tempAngle) {
+                this.curving(this.val);
+                console.log(this.val + " Negative Angle");
+            }
+        } else 
+        if(this.distance1 < 2 && this.val + this.angle < this.tempAngle) {
             this.curving(this.val);
+            console.log(this.val + " Positive Angle");
         }
 
         switch (this.currentState) {
