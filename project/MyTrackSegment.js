@@ -55,6 +55,22 @@ export class MyTrackSegment extends CGFobject {
         this.rails.apply();
         
         //Apply Transformation
+
+        this.scene.pushMatrix();
+        this.scene.translate(this.point2X, 0.02, this.point2Z);
+        this.scene.rotate(-this.angle, 0, 1, 0);
+        this.quad.updateTexCoords([
+            0, 1,
+            1, 1,
+			0, 0,
+			0, 1,
+		]);
+
+        this.scene.scale(4, 1, 4);
+        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+        this.quad.display();
+        this.scene.popMatrix();
+
         this.scene.pushMatrix();
         this.scene.translate(this.point1X, 0, this.point1Z);
         this.scene.rotate(-this.angle, 0, 1, 0);
@@ -69,5 +85,7 @@ export class MyTrackSegment extends CGFobject {
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
+
+        
     }
 }

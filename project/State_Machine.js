@@ -29,15 +29,15 @@ export class State_Machine extends CGFobject {
         this.currentZ = this.tracks.points[0][1];
         this.angle = 0;
         this.velocity = 0;
-        this.cruiseVelocity = 0.07;
-        this.acceleration = 0.007;
+        this.cruiseVelocity = 0.03;
+        this.acceleration = 0.003;
 
         this.calcAngle(this.tracks.points[0], this.tracks.points[1]);
 
     }
 
     calcAngle(point1, point2) {
-        this.angle = -Math.atan2(point2[1] - point1[1], point2[0] - point1[0]) + Math.PI/2;
+        return -Math.atan2(point2[1] - point1[1], point2[0] - point1[0]) + Math.PI/2;
     }
 
     calcTwoPointsLine(point1, point2) {
@@ -74,11 +74,40 @@ export class State_Machine extends CGFobject {
 
         this.currentX = this.tracks.points[this.currentStation][0];
         this.calcTwoPointsLine(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
-        this.calcAngle(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
+        this.angle = this.calcAngle(this.tracks.points[this.currentStation], this.tracks.points[this.nextStation]);
 
     }
 
+    curving(val) {
+        this.angle += val;
+    }
+
     update(t) {
+
+        this.distance1 = this.calcDistanceTwoPoints(this.currentX, this.currentZ, this.tracks.points[this.nextStation][0], this.tracks.points[this.nextStation][1]);
+        
+        if(this.nextStation + 1 >= this.tracks.points.length) {
+            this.drift = this.calcAngle(this.tracks.points[this.nextStation], this.tracks.points[0]);
+        } else {
+            this.drift = this.calcAngle(this.tracks.points[this.nextStation], this.tracks.points[this.nextStation + 1]);
+        }
+
+        if(this.tracks.points[this.nextStation][2] == "station") {
+            this.frames = 2 / 0.015;
+        } else {
+            this.frames = 2 / this.cruiseVelocity;
+        }
+
+        this.val = this.drift/this.frames;
+
+        console.log(this.drift);
+
+        if(this.drift < 0) {
+            this.val *= -1;
+        }
+        if(this.distance1 < 2) {
+            this.curving(this.val);
+        }
 
         switch (this.currentState) {
             case vehicle_state.STOPPED:
