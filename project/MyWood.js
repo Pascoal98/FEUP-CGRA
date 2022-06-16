@@ -24,7 +24,7 @@ export class MyWood extends CGFobject {
         this.cover = new MyCircle(scene, 20);
 
         this.currentState = wood_state.NOTATTACHED;
-        this.isLoaded = true;
+        this.isLoaded = false;
 
         this.initMaterials(scene);
 
